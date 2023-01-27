@@ -9,8 +9,7 @@ mongoose.set("strictQuery", true);
 // !Routes
 
 const categoryRoute = require("./routes/categories.js");
-
-
+const productRoute = require("./routes/products.js");
 
 
 dotenv.config(); 
@@ -30,6 +29,7 @@ app.use(cors());
 
 
 app.use("/api/categories", categoryRoute);
+app.use("/api/products", productRoute);
 
 
 app.listen(port, () => {
