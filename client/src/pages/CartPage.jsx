@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import Header from '../components/header/Header';
 import { Button, Card,  Table } from 'antd';
 import CreateBill from '../components/cart/CreateBill';
+import Header from '../components/header/Header';
 
 const CartPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -40,7 +40,7 @@ const CartPage = () => {
 
   return (
     <>
-      <Header />
+    <Header/>
       <div className="px-6">
       <h1 className='text-3xl font-bold text-center pb-5'>Sepet Detay</h1>
         <Table

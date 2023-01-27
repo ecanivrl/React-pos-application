@@ -1,193 +1,73 @@
-import { Button } from 'antd';
-import {
-  ClearOutlined,
-  PlusCircleOutlined,
-  MinusCircleOutlined,
-} from '@ant-design/icons';
+import { Button, Card, Form, Input, Modal, Select } from 'antd';
 import React from 'react';
 
-const CartTotals = () => {
+const CreateBill = ({ isModalOpen, setIsModalOpen }) => {
+
+  const onFinish = (values) => {
+    console.log('Success:', values);
+  };
+
   return (
-    <div className="cart h-ful max-h-[calc(100vh_-_90px)] flex flex-col">
-      <h2 className="bg-blue-600 text-center py-4 text-white font-bold">
-        Sepetteki Ürünler
-      </h2>
-      <ul className="ecani cart-items px-2 flex flex-col gap-y-3 py-2 overflow-auto">
-        <li className="cart-item flex justify-between">
-          <div className="flex items-center">
-            <img
-              src="https://i.lezzet.com.tr/images-xxlarge-secondary/elma-nasil-yenir-221135ca-f383-474c-a4f5-ad02a45db978.jpg"
-              alt=""
-              className="w-16 h-16 object-cover"
-            />
-            <div className="flex flex-col ml-2">
-              <b>Elma</b>
-              <span>12₺ x 2</span>
-            </div>
+    <Modal
+      title="Fatura Oluştur"
+      open={isModalOpen}
+      footer={false}
+      onCancel={() => setIsModalOpen(false)}
+    
+    >
+      <Form layout={'vertical'}   onFinish={onFinish}>
+        <Form.Item
+          label="Müşteri adı"
+          name={'customerName'}
+          rules={[
+            { required: true, message: 'Müşeteri Adı Alanı Boş olmamalıdır' },
+          ]}
+        >
+          <Input placeholder="Bir müşteri adı yazınız " />
+        </Form.Item>
+        <Form.Item
+          name={'phoneNumber'}
+          label="Tel No"
+          rules={[{ required: true, message: 'Tel No Alanı Boş olmamalıdır' }]}
+        >
+          <Input placeholder="Bir Telefon Numarası yazınız" maxLength={11}/>
+        </Form.Item>
+        <Form.Item
+          name={'paymentMode'}
+          label="Ödeme yöntemi"
+          rules={[{ required: true, message: 'Lütfen Bir Ödeme Yöntemi Seçiniz Lan' }]}
+        >
+          <Select placeholder="Ödeme Yöntemi Seçiniz...">
+            <Select.Option value="Nakit">Nakit</Select.Option>
+            <Select.Option value="Kredi Kartı">Kredi Kartı</Select.Option>
+          </Select>
+        </Form.Item>
+        <Card>
+          <div className="flex justify-between mt-5">
+            <span>Ara Toplam</span>
+            <span>549.00₺</span>
           </div>
-          <div className="flex items-center gap-x-1">
-            <Button
-              type="primary"
-              size="small"
-              className="w-full flex items-center justify-center !rounded-full"
-              icon={<PlusCircleOutlined />}
-            />
-            <span className="">1</span>
-            <Button
-              type="primary"
-              size="small"
-              className="w-full flex items-center justify-center !rounded-full"
-              icon={<MinusCircleOutlined />}
-            />
+          <div className="flex justify-between my-2">
+            <span>Ara Toplam</span>
+            <span className="text-red-600">43.92₺</span>
           </div>
-        </li>
-        <li className="cart-item flex justify-between">
-          <div className="flex items-center">
-            <img
-              src="https://i.lezzet.com.tr/images-xxlarge-secondary/elma-nasil-yenir-221135ca-f383-474c-a4f5-ad02a45db978.jpg"
-              alt=""
-              className="w-16 h-16 object-cover"
-            />
-            <div className="flex flex-col ml-2">
-              <b>Elma</b>
-              <span>12₺ x 2</span>
-            </div>
+          <div className="flex justify-between">
+            <b>Toplam</b>
+            <b>592.92₺</b>
           </div>
-          <div className="flex items-center gap-x-1">
-            <Button
-              type="primary"
-              size="small"
-              className="w-full flex items-center justify-center !rounded-full"
-              icon={<PlusCircleOutlined />}
-            />
-            <span className="">1</span>
-            <Button
-              type="primary"
-              size="small"
-              className="w-full flex items-center justify-center !rounded-full"
-              icon={<MinusCircleOutlined />}
-            />
-          </div>
-        </li>
-        <li className="cart-item flex justify-between">
-          <div className="flex items-center">
-            <img
-              src="https://i.lezzet.com.tr/images-xxlarge-secondary/elma-nasil-yenir-221135ca-f383-474c-a4f5-ad02a45db978.jpg"
-              alt=""
-              className="w-16 h-16 object-cover"
-            />
-            <div className="flex flex-col ml-2">
-              <b>Elma</b>
-              <span>12₺ x 2</span>
-            </div>
-          </div>
-          <div className="flex items-center gap-x-1">
-            <Button
-              type="primary"
-              size="small"
-              className="w-full flex items-center justify-center !rounded-full"
-              icon={<PlusCircleOutlined />}
-            />
-            <span className="">1</span>
-            <Button
-              type="primary"
-              size="small"
-              className="w-full flex items-center justify-center !rounded-full"
-              icon={<MinusCircleOutlined />}
-            />
-          </div>
-        </li>
-        <li className="cart-item flex justify-between">
-          <div className="flex items-center">
-            <img
-              src="https://i.lezzet.com.tr/images-xxlarge-secondary/elma-nasil-yenir-221135ca-f383-474c-a4f5-ad02a45db978.jpg"
-              alt=""
-              className="w-16 h-16 object-cover"
-            />
-            <div className="flex flex-col ml-2">
-              <b>Elma</b>
-              <span>12₺ x 2</span>
-            </div>
-          </div>
-          <div className="flex items-center gap-x-1">
-            <Button
-              type="primary"
-              size="small"
-              className="w-full flex items-center justify-center !rounded-full"
-              icon={<PlusCircleOutlined />}
-            />
-            <span className="">1</span>
-            <Button
-              type="primary"
-              size="small"
-              className="w-full flex items-center justify-center !rounded-full"
-              icon={<MinusCircleOutlined />}
-            />
-          </div>
-        </li>
-        <li className="cart-item flex justify-between">
-          <div className="flex items-center">
-            <img
-              src="https://i.lezzet.com.tr/images-xxlarge-secondary/elma-nasil-yenir-221135ca-f383-474c-a4f5-ad02a45db978.jpg"
-              alt=""
-              className="w-16 h-16 object-cover"
-            />
-            <div className="flex flex-col ml-2">
-              <b>Elma</b>
-              <span>12₺ x 2</span>
-            </div>
-          </div>
-          <div className="flex items-center gap-x-1">
-            <Button
-              type="primary"
-              size="small"
-              className="w-full flex items-center justify-center !rounded-full"
-              icon={<PlusCircleOutlined />}
-            />
-            <span className="">1</span>
-            <Button
-              type="primary"
-              size="small"
-              className="w-full flex items-center justify-center !rounded-full"
-              icon={<MinusCircleOutlined />}
-            />
-          </div>
-        </li>
-      </ul>
-      <div className="cart-totals mt-auto">
-        <div className="border-t border-b">
-          <div className="flex justify-between p-2">
-            <b>Ara Toplam</b>
-            <span>99₺</span>
-          </div>
-          <div className="flex justify-between p-2">
-            <b>KDV %8</b>
-            <span className="text-red-700">+7.92₺</span>
-          </div>
-        </div>
-        <div className="border-b mt-4">
-          <div className="flex justify-between p-2">
-            <b className="text-green-500 text-xl">Genel Toplam</b>
-            <span className="text-xl">99₺</span>
-          </div>
-        </div>
-        <div className="py-4 px-2">
-          <Button type="primary" size="large" className="w-full">
+          <Button
+            htmlType="submit"
+            onClick={() => setIsModalOpen(true)}
+            type="primary"
+            className="mt-4 w-full"
+            size="large"
+          >
             Sipariş Oluştur
           </Button>
-          <Button
-            type="primary"
-            danger
-            size="large"
-            className="w-full mt-2 flex justify-center items-center"
-            icon={<ClearOutlined />}
-          >
-            Temizle
-          </Button>
-        </div>
-      </div>
-    </div>
+        </Card>
+      </Form>
+    </Modal>
   );
 };
 
-export default CartTotals;
+export default CreateBill;

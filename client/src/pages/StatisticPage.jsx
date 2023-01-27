@@ -106,12 +106,12 @@ const StatisticPage = () => {
             <h2 className='text-lg'>Hoş geldin  <span className='text-[#1F8A70] font-bold text-xl'>ADMIN</span></h2>
         </div>
         {/* grid-cols-[repeat(auto-fill,_330px)] */}
-        <div className="statistic-cards grid xl:grid-cols-4 md:grid-cols-2 my-2 gap-4 justify-center pb-10 sm:pb-0">
+         <div className="statistic-cards grid xl:grid-cols-4 md:grid-cols-2 my-2 gap-4 justify-center pb-10 sm:pb-0">
         <StatisticCard title={"Toplam Müşteri"} amount={10} img={"images/user.png"}/>
         <StatisticCard title={"Toplam Kazanç"} amount={"987.646₺"} img={"images/money.png"}/>
         <StatisticCard title={"Toplam Satış"} amount={1144} img={"images/sale.png"}/>
          <StatisticCard title={"Toplam Ürün"} amount={1004} img={"images/product.png"}/>
-        </div>
+        </div> 
         <div className="flex justify-between gap-10 lg:flex-row flex-col items-center">
         <div className="lg:w-1/2 w-full">
               <Area {...config} />
