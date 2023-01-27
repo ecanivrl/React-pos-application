@@ -1,13 +1,17 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const dotenv = require('dotenv');
 const app = express();
 const port = 5000;
-mongoose.set("strictQuery", true)
+mongoose.set("strictQuery", false)
+
+
+dotenv.config()
 
 //! Connect to MongoDB
 const connect = async () => {
     try{
-         await mongoose.connect("mongodb+srv://EcaniVRL:Kv5033.,@cluster0.v1z0hbp.mongodb.net/?retryWrites=true&w=majority")
+         await mongoose.connect(process.env.MONGO_URI)
          console.log('MongoDB connected');
     }catch(error){
         console.error('MongoDB connection error', error);
