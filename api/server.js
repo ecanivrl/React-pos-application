@@ -13,7 +13,6 @@ const productRoute = require("./routes/products.js");
 const billRoute = require("./routes/bills.js");
 const authRoute = require("./routes/auth.js");
 
-
 dotenv.config(); 
 
 const connect = async () => {
