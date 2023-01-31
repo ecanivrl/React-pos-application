@@ -29,7 +29,6 @@ app.use(cors());
 
 
 app.use("/api/categories", categoryRoute);
-app.use("/api/products", productRoute);
 
 
 app.listen(port, () => {
