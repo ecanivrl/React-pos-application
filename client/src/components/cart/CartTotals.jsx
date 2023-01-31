@@ -12,7 +12,7 @@ const CartTotals = () => {
       <h2 className="bg-blue-600 text-center py-4 text-white font-bold">
         Sepetteki Ürünler
       </h2>
-      <ul className="ecani cart-items px-2 flex flex-col gap-y-3 py-2 overflow-auto">
+      <ul className="ecani cart-items px-2 flex flex-col gap-y-3 py-2 pb-20 overflow-auto">
         <li className="cart-item flex justify-between">
           <div className="flex items-center">
             <img

@@ -42,6 +42,10 @@ body {
   }
 }
 
+.category-item{
+  @apply min-w-[145px] bg-green-700 px-6 py-10 flex items-end justify-center text-white cursor-pointer hover:bg-pink-700 transition-all text-center;
+}
+
 @media (min-width: 768px) {
   body {
     margin: 0;
