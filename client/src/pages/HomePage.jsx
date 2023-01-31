@@ -1,16 +1,33 @@
-import React from 'react'
-import Header from '../components/header/Header'
-import Categories from '../components/categories/Categories'
-import Products from '../components/products/Products'
-import CartTotals from '../components/cart/CartTotals'
+import React, { useState, useEffect } from 'react';
+import Header from '../components/header/Header';
+import Categories from '../components/categories/Categories';
+import Products from '../components/products/Products';
+import CartTotals from '../components/cart/CartTotals';
 
 const HomePage = () => {
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const getCategories = async () => {
+      try {
+        const res = await fetch('http://localhost:5000/api/categories/get-all');
+        const data = await res.json();
+        setCategories(data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getCategories();
+  }, []);
+
   return (
     <>
-    <Header/>
+      <Header />
       <div className="home px-6 flex flex-col md:flex-row justify-between gap-8 md:pb-0 pb-24">
         <div className="categories overflow-auto custom-horizontal-scrollbar max-h-[calc(100vh_-_103px)] md:pb-20">
-          <Categories />
+          <div className="pb-1">
+            <Categories categories={categories} setCategories={setCategories} />
+          </div>
         </div>
         <div className="products flex-[8] overflow-auto max-h-[calc(100vh_-_103px)] md:pb-[81px] pb-0">
           <Products />
@@ -20,7 +37,7 @@ const HomePage = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default HomePage
+export default HomePage;
