@@ -32,6 +32,25 @@ const Edit = ({
     }
   };
 
+  const deleteCategory = async (id) => {
+    try{
+    fetch(`http://localhost:5000/api/categories/delete-category`,{
+      method: 'DELETE',
+      body: JSON.stringify({categoryId: id}),
+      headers: { 'Content-type': 'application/json; charset=UTF-8' },
+    })
+    message.success(` Kategori başarıyla silindi.`);
+   setTimeout(() => {
+    setEditIsModalOpen(false);
+   }, 1200)
+    setCategories(categories.filter((item) => item._id !== id));
+    }catch(error){
+      message.success(`Bir şeyler yanlış gitti.`);
+      console.log(error);
+    }
+  };
+
+
   const columns = [
     {
       title: 'Category Title',
@@ -64,7 +83,7 @@ const Edit = ({
             <Button type="link" htmlType="submit" className="text-gray-500" onClick={() => setEditIsModalOpen(false)}>
               Kaydet
             </Button>
-            <Button type="link" danger>
+            <Button type="link" danger onClick={() => deleteCategory(record._id)}>
               Sil
             </Button>
           </div>

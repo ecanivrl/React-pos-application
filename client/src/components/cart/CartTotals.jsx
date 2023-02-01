@@ -12,13 +12,13 @@ const CartTotals = () => {
       <h2 className="bg-blue-600 text-center py-4 text-white font-bold text-sm sm:text-lg">
         Sepetteki Ürünler
       </h2>
-      <ul className="ecani cart-items px-2 flex flex-col gap-y-3 py-2 pb-20 overflow-auto">
+      <ul className="ecani cart-items px-1 flex flex-col gap-y-3 py-2 pb-20 overflow-auto">
         <li className="cart-item flex justify-between">
           <div className="flex items-center">
             <img
               src="https://i.lezzet.com.tr/images-xxlarge-secondary/elma-nasil-yenir-221135ca-f383-474c-a4f5-ad02a45db978.jpg"
               alt=""
-              className="w-16 h-16 object-cover"
+              className="w-14 h-14 object-cover"
             />
             <div className="flex flex-col ml-2">
               <b>Elma</b>
@@ -61,13 +61,13 @@ const CartTotals = () => {
           </div>
         </div>
         <div className="py-4 px-2">
-          <Button type="primary" size="large" className="w-full">
+          <Button type="primary" size="middle" className="w-full">
             Sipariş Oluştur
           </Button>
           <Button
             type="primary"
             danger
-            size="large"
+            size="middle"
             className="w-full mt-2 flex justify-center items-center"
             icon={<ClearOutlined />}
           >
