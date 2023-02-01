@@ -35,9 +35,12 @@ const Categories = ({ categories, setCategories }) => {
         setCategories={setCategories}
       />
       
-      <Edit
+      <Edit className="overflow-y-auto h-[300px]"
        isEditModalOpen={isEditModalOpen} 
-       setEditIsModalOpen={setEditIsModalOpen}/>
+       setEditIsModalOpen={setEditIsModalOpen}
+       categories={categories}
+       setCategories={setCategories}
+/>
     </ul>
   );
 };

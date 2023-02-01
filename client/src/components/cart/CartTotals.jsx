@@ -8,8 +8,8 @@ import React from 'react';
 
 const CartTotals = () => {
   return (
-    <div className="cart h-ful max-h-[calc(100vh_-_90px)] flex flex-col">
-      <h2 className="bg-blue-600 text-center py-4 text-white font-bold">
+    <div className="cart h-full max-h-[calc(100vh_-_90px)] flex flex-col">
+      <h2 className="bg-blue-600 text-center py-4 text-white font-bold text-sm sm:text-lg">
         Sepetteki Ürünler
       </h2>
       <ul className="ecani cart-items px-2 flex flex-col gap-y-3 py-2 pb-20 overflow-auto">
@@ -41,118 +41,7 @@ const CartTotals = () => {
             />
           </div>
         </li>
-        <li className="cart-item flex justify-between">
-          <div className="flex items-center">
-            <img
-              src="https://i.lezzet.com.tr/images-xxlarge-secondary/elma-nasil-yenir-221135ca-f383-474c-a4f5-ad02a45db978.jpg"
-              alt=""
-              className="w-16 h-16 object-cover"
-            />
-            <div className="flex flex-col ml-2">
-              <b>Elma</b>
-              <span>12₺ x 2</span>
-            </div>
-          </div>
-          <div className="flex items-center gap-x-1">
-            <Button
-              type="primary"
-              size="small"
-              className="w-full flex items-center justify-center !rounded-full"
-              icon={<PlusCircleOutlined />}
-            />
-            <span className="">1</span>
-            <Button
-              type="primary"
-              size="small"
-              className="w-full flex items-center justify-center !rounded-full"
-              icon={<MinusCircleOutlined />}
-            />
-          </div>
-        </li>
-        <li className="cart-item flex justify-between">
-          <div className="flex items-center">
-            <img
-              src="https://i.lezzet.com.tr/images-xxlarge-secondary/elma-nasil-yenir-221135ca-f383-474c-a4f5-ad02a45db978.jpg"
-              alt=""
-              className="w-16 h-16 object-cover"
-            />
-            <div className="flex flex-col ml-2">
-              <b>Elma</b>
-              <span>12₺ x 2</span>
-            </div>
-          </div>
-          <div className="flex items-center gap-x-1">
-            <Button
-              type="primary"
-              size="small"
-              className="w-full flex items-center justify-center !rounded-full"
-              icon={<PlusCircleOutlined />}
-            />
-            <span className="">1</span>
-            <Button
-              type="primary"
-              size="small"
-              className="w-full flex items-center justify-center !rounded-full"
-              icon={<MinusCircleOutlined />}
-            />
-          </div>
-        </li>
-        <li className="cart-item flex justify-between">
-          <div className="flex items-center">
-            <img
-              src="https://i.lezzet.com.tr/images-xxlarge-secondary/elma-nasil-yenir-221135ca-f383-474c-a4f5-ad02a45db978.jpg"
-              alt=""
-              className="w-16 h-16 object-cover"
-            />
-            <div className="flex flex-col ml-2">
-              <b>Elma</b>
-              <span>12₺ x 2</span>
-            </div>
-          </div>
-          <div className="flex items-center gap-x-1">
-            <Button
-              type="primary"
-              size="small"
-              className="w-full flex items-center justify-center !rounded-full"
-              icon={<PlusCircleOutlined />}
-            />
-            <span className="">1</span>
-            <Button
-              type="primary"
-              size="small"
-              className="w-full flex items-center justify-center !rounded-full"
-              icon={<MinusCircleOutlined />}
-            />
-          </div>
-        </li>
-        <li className="cart-item flex justify-between">
-          <div className="flex items-center">
-            <img
-              src="https://i.lezzet.com.tr/images-xxlarge-secondary/elma-nasil-yenir-221135ca-f383-474c-a4f5-ad02a45db978.jpg"
-              alt=""
-              className="w-16 h-16 object-cover"
-            />
-            <div className="flex flex-col ml-2">
-              <b>Elma</b>
-              <span>12₺ x 2</span>
-            </div>
-          </div>
-          <div className="flex items-center gap-x-1">
-            <Button
-              type="primary"
-              size="small"
-              className="w-full flex items-center justify-center !rounded-full"
-              icon={<PlusCircleOutlined />}
-            />
-            <span className="">1</span>
-            <Button
-              type="primary"
-              size="small"
-              className="w-full flex items-center justify-center !rounded-full"
-              icon={<MinusCircleOutlined />}
-            />
-          </div>
-        </li>
+       
       </ul>
       <div className="cart-totals mt-auto">
         <div className="border-t border-b">
@@ -167,7 +56,7 @@ const CartTotals = () => {
         </div>
         <div className="border-b mt-4">
           <div className="flex justify-between p-2">
-            <b className="text-green-500 text-xl">Genel Toplam</b>
+            <b className="text-green-500 sm:text-xl text-lg">Genel Toplam</b>
             <span className="text-xl">99₺</span>
           </div>
         </div>

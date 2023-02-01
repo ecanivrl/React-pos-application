@@ -21,7 +21,7 @@ const Header = () => {
           />
         </div>
         <div className="menu-links flex justify-between items-center gap-7 md:static z-50 fixed bottom-0 md:w-auto w-screen
-        md:bg-transparent bg-white left-0 md:px-0 px-6 border-t md:border-none py-1 md:py-0">
+        md:bg-transparent bg-white left-0 md:px-0 px-8 border-t md:border-none py-1 md:py-0">
           <Link to={"/"} className='menu-link hover:text-[#40a9ff] flex flex-col transition-all duration-500'>
             <HomeOutlined className='md:text-2xl text-xl' />
             <span className='md:text-xs text-[10px]'>Ana Sayfa</span>

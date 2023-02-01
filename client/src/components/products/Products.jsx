@@ -2,7 +2,7 @@ import React from 'react';
 
 const Products = () => {
   return (
-    <div className="products-wrapper grid grid-cols-[repeat(auto-fill,_150px)] gap-4 ">
+    <div className="products-wrapper grid grid-cols-[repeat(auto-fill,_150px)] sm:gap-4 gap-8">
       <div className="products-item border hover:shadow-lg cursor-pointer transition-all select-none">
         <div className="products-img">
           <img
