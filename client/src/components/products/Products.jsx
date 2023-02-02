@@ -1,38 +1,49 @@
-import React,{useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
+import ProductItem from './ProductItem';
+import { PlusOutlined, EditOutlined } from '@ant-design/icons';
+import Add from './Add';
 
-const Products = () => {
-  const [products, setProducts ] = useState([])
+const Products = ({ categories }) => {
+  const [isAddModalOpen, setAddIsModalOpen] = useState(false);
+  const [products, setProducts] = useState([]);
 
- useEffect(() => {
-const getProducts = async () => {
-  try{
-  const res = await fetch(`http://localhost:5000/api/products/get-all`)
-  const data = await res.json()
-  setProducts(data)
-  }catch(error){
- console.log(error)
-  }
-}
-getProducts()
- }, [])
+  useEffect(() => {
+    const getProducts = async () => {
+      try {
+        const res = await fetch(`http://localhost:5000/api/products/get-all`);
+        const data = await res.json();
+        setProducts(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getProducts();
+  }, []);
 
   return (
     <div className="products-wrapper grid grid-cols-[repeat(auto-fill,_155px)] gap-4 ">
-      {products && products.map((item) => (
-        <div className="products-item border hover:shadow-lg cursor-pointer transition-all select-none">
-        <div className="products-img">
-          <img
-            className="h-28 object-cover w-full border-b"
-            src={item.img}
-            alt=""
-          />
-        </div>
-        <div className="products-info flex flex-col p-3">
-          <span className="font-bold">{item.title}</span>
-          <span>{item.price}₺</span>
-        </div>
+      {products &&
+        products.map((item) => <ProductItem item={item} key={item._id} />)}
+      <div
+        className="products-item border shadow-lg cursor-pointer transition-all select-none bg-purple-500
+      flex justify-center items-center"
+        onClick={() => setAddIsModalOpen(true)}
+      >
+        <PlusOutlined className="sm:text-3xl text-lg text-white hover:opacity-90" />
       </div>
-      ))}
+      <div
+        className="products-item border shadow-lg cursor-pointer transition-all select-none bg-orange-500
+      flex justify-center items-center"
+      >
+        <EditOutlined className="sm:text-3xl text-lg text-white hover:opacity-90" />
+      </div>
+      <Add
+        isAddModalOpen={isAddModalOpen}
+        setAddIsModalOpen={setAddIsModalOpen}
+        categories={categories}
+        products={products}
+        setProducts={setProducts}
+      />
     </div>
   );
 };

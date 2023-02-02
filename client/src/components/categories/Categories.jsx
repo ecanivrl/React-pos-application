@@ -17,7 +17,7 @@ const Categories = ({ categories, setCategories }) => {
         ))}
 
       <li
-        className="category-item !bg-purple-800 hover:opacity-90"
+        className="category-item !bg-purple-500 hover:opacity-90"
         onClick={() => setAddIsModalOpen(true)}
       >
         <PlusOutlined className="md:text-3xl" />
