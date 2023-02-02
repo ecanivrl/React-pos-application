@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import ProductItem from './ProductItem';
 import { PlusOutlined, EditOutlined } from '@ant-design/icons';
 import Add from './Add';
+import { useNavigate } from 'react-router-dom';
 
 const Products = ({ categories }) => {
-  const [isAddModalOpen, setAddIsModalOpen] = useState(false);
   const [products, setProducts] = useState([]);
+  const [isAddModalOpen, setAddIsModalOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getProducts = async () => {
@@ -25,14 +27,15 @@ const Products = ({ categories }) => {
       {products &&
         products.map((item) => <ProductItem item={item} key={item._id} />)}
       <div
-        className="products-item border shadow-lg cursor-pointer transition-all select-none bg-purple-500
+        className="products-item min-h-[180px] border shadow-lg cursor-pointer transition-all select-none bg-purple-500
       flex justify-center items-center"
         onClick={() => setAddIsModalOpen(true)}
       >
         <PlusOutlined className="sm:text-3xl text-lg text-white hover:opacity-90" />
       </div>
       <div
-        className="products-item border shadow-lg cursor-pointer transition-all select-none bg-orange-500
+      onClick={() => navigate('/products')}
+        className="products-item min-h-[180px] border shadow-lg cursor-pointer transition-all select-none bg-orange-500
       flex justify-center items-center"
       >
         <EditOutlined className="sm:text-3xl text-lg text-white hover:opacity-90" />
