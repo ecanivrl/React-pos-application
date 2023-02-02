@@ -75,6 +75,13 @@ const Edit = () => {
       console.log(error);
     }
   };
+  
+  const CloseModalAll = () => {
+    setTimeout(() => {
+      setIsEditModalOpen(false)
+      window.location.reload()
+    },1200)
+  }
 
   const columns = [
     {
@@ -206,8 +213,8 @@ const Edit = () => {
             />
           </Form.Item>
           <Form.Item className="flex justify-end mb-0">
-            <Button type="primary" htmlType="submit">
-              Oluştur
+            <Button type="primary" htmlType="submit" onClick={CloseModalAll}>
+              Düzenle
             </Button>
           </Form.Item>
         </Form>
