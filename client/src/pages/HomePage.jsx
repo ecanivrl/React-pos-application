@@ -25,7 +25,7 @@ const HomePage = () => {
   return (
     <>
       <Header />
-      <div className="home px-6 flex flex-col md:flex-row justify-between gap-3 md:pb-0 pb-24 ">
+      <div className="home px-6 flex flex-col md:flex-row justify-between gap-3 md:pb-0 pb-24">
         <div className="categories overflow-auto custom-horizontal-scrollbar max-h-[calc(100vh_-_103px)] md:pb-7">
           <div className="pb-1">
             <Categories categories={categories} setCategories={setCategories} />
