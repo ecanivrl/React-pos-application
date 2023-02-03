@@ -1,19 +1,26 @@
 import React from 'react';
 import { addProduct } from '../../redux/cartSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { message } from 'antd';
 
 const ProductItem = ({ item }) => {
   const dispatch = useDispatch();
-  
+  const cart = useSelector((state) => state.cart);
+
   const handleClick = () => {
     dispatch(addProduct({ ...item, quantity: 1 }));
+    if (cart.cartItems.find((cartItem) => cartItem._id === item._id)) {
+      message.success('Sepete aynı üründen 1 adet daha  Eklendi');
+    } else {
+      message.success('Sepete Ürün Eklendi');
+    }
   };
 
-
- 
-
   return (
-    <div className="products-item border shadow-xl cursor-pointer transition-all select-none" onClick={handleClick}>
+    <div
+      className="products-item border shadow-xl cursor-pointer transition-all select-none"
+      onClick={handleClick}
+    >
       <div className="products-img">
         <img
           className="h-28 object-contain  w-full border-b"

@@ -1,4 +1,4 @@
-import { Button } from 'antd';
+import { Button, message } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   ClearOutlined,
@@ -6,7 +6,7 @@ import {
   SyncOutlined,
   MinusCircleOutlined,
 } from '@ant-design/icons';
-import { deleteCart, increase, decrease } from '../../redux/cartSlice';
+import { deleteCart, increase, decrease, reset } from '../../redux/cartSlice';
 
 const CartTotals = () => {
   const cart = useSelector((state) => state.cart);
@@ -40,39 +40,43 @@ const CartTotals = () => {
               </div>
               <div className="flex items-center ">
                 <Button
-                  onClick={() => dispatch(increase(item))}
+                  onClick={() => {
+                    dispatch(increase(item));
+                    message.success('Sepete aynı üründen 1 adet daha  Eklendi');
+                  }}
                   type="primary"
                   size="small"
                   className="w-full flex items-center justify-center !rounded-full"
                   icon={<PlusCircleOutlined />}
                 />
-                <span className="font-bold w-6 inline-block text-center">{item.quantity}</span>
+                <span className="font-bold w-6 inline-block text-center">
+                  {item.quantity}
+                </span>
                 <Button
-                   onClick={() => {
+                  onClick={() => {
                     if (item.quantity === 1) {
-                      if (window.confirm("Ürün Silinsin Mi?")) {
-                        dispatch(decrease(item));
-                      }
+                      dispatch(decrease(item));
+                      message.success('Sepetinizden Silindi');
                     }
                     if (item.quantity > 1) {
                       dispatch(decrease(item));
+                      message.success(
+                        'Sepetinizden aynı  ürün adedindden 1 azaldı'
+                      );
                     }
                   }}
                   type="primary"
                   size="small"
                   className="w-full flex items-center justify-center !rounded-full"
-                  icon={<MinusCircleOutlined />
-                }
+                  icon={<MinusCircleOutlined />}
                 />
               </div>
             </li>
           ))
         ) : (
-          <div className='flex  justify-center gap-x-5 items-center '>
-              <SyncOutlined spin />
-            <h1 className=" text-lg font-bold text-red-400">
-              sepetiniz boş
-            </h1>
+          <div className="flex  justify-center gap-x-5 items-center ">
+            <SyncOutlined spin />
+            <h1 className=" text-lg font-bold text-red-400">sepetiniz boş</h1>
           </div>
         )}
       </ul>
@@ -111,11 +115,16 @@ const CartTotals = () => {
             Sipariş Oluştur
           </Button>
           <Button
+          disabled={cart.cartItems.length === 0}
             type="primary"
             danger
             size="middle"
             className="w-full mt-2 flex justify-center items-center"
             icon={<ClearOutlined />}
+            onClick={() => {
+              dispatch(reset());
+              message.success('Sepetteki bütün ürünler silindi');
+            }}
           >
             Temizle
           </Button>
