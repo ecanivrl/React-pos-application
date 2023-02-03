@@ -51,7 +51,7 @@ const Header = () => {
             <span className='md:text-xs text-[10px]'>Çıkış</span>
           </Link>
         </div>
-        <Badge count={5} offset={[0,6]} className='md:hidden flex'>
+        <Badge count={cart.cartItems.length} offset={[0,6]} className='md:hidden flex'>
           <Link to={"/cart"} className='menu-link hover:text-[#40a9ff] flex flex-col transition-all duration-500 justify-center items-center'>
             <ShoppingCartOutlined className='text-2xl ' />
             <span className='md:text-xs text-[10px]'>Sepet</span>
