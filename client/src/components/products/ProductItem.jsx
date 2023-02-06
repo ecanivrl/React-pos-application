@@ -6,13 +6,12 @@ import { message } from 'antd';
 const ProductItem = ({ item }) => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
-
   const handleClick = () => {
     dispatch(addProduct({ ...item, quantity: 1 }));
     if (cart.cartItems.find((cartItem) => cartItem._id === item._id)) {
-      message.success('Sepete aynı üründen 1 adet daha  Eklendi');
+      message.success(`${item.title} isimli Ürün Sepete 1 Adet Daha Eklendi`);
     } else {
-      message.success('Ürün Sepete  Eklendi');
+      message.success(`${item.title}  Sepete  Eklendi`);
     }
   };
 
