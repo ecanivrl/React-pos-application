@@ -97,16 +97,10 @@ const Edit = () => {
     {
       title: 'Ürün Görseli',
       dataIndex: 'img',
-      width: '8%',
-      render: (_, record) => {
-        return (
-          <img
-            src={record.img}
-            alt=""
-            className="w-full h-20 object-center object-cover"
-          />
-        );
-      },
+      width: "5%",
+      render: (img) => <div className='flex justify-center items-center mx-auto'>
+        <img src={img} alt="" className="md:w-24 md:h-24 h-10 w-10 rounded-full object-cover cursor-pointer" />
+      </div>,
     },
     {
       title: 'Ürün Fiyatı',

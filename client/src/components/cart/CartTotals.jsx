@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   ClearOutlined,
   PlusCircleOutlined,
-  SyncOutlined,
   MinusCircleOutlined,
+  SmileTwoTone
 } from '@ant-design/icons';
 import { deleteCart, increase, decrease, reset } from '../../redux/cartSlice';
 
@@ -26,10 +26,11 @@ const CartTotals = () => {
             >
               <div className="flex items-center">
                 <img
-                  onClick={() => dispatch(deleteCart(item))}
+                  onClick={() => setTimeout(dispatch(deleteCart(item))
+                    ,2000)}
                   src={item.img}
                   alt=""
-                  className="w-14 h-14 object-cover cursor-pointer"
+                  className="w-14 h-14  object-cover cursor-pointer"
                 />
                 <div className="flex flex-col ml-2">
                   <b>{item.title}</b>
@@ -56,12 +57,12 @@ const CartTotals = () => {
                   onClick={() => {
                     if (item.quantity === 1) {
                       dispatch(decrease(item));
-                      message.success('Sepetinizden Silindi');
+                      message.success('Ürün Sepetinizden Silindi');
                     }
                     if (item.quantity > 1) {
                       dispatch(decrease(item));
                       message.success(
-                        'Sepetinizden aynı  ürün adedindden 1 azaldı'
+                        'Sepetinizdeki aynı  ürün adedinden 1 azaldı'
                       );
                     }
                   }}
@@ -74,9 +75,9 @@ const CartTotals = () => {
             </li>
           ))
         ) : (
-          <div className="flex  justify-center gap-x-5 items-center ">
-            <SyncOutlined spin />
-            <h1 className=" text-lg font-bold text-red-400">sepetiniz boş</h1>
+          <div className="flex h-full justify-center gap-x-5 items-center ">
+            <SmileTwoTone />
+            <h1 className=" text-lg font-bold ">sepetiniz boş</h1>
           </div>
         )}
       </ul>

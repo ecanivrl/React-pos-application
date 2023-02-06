@@ -12,7 +12,7 @@ const ProductItem = ({ item }) => {
     if (cart.cartItems.find((cartItem) => cartItem._id === item._id)) {
       message.success('Sepete aynı üründen 1 adet daha  Eklendi');
     } else {
-      message.success('Sepete Ürün Eklendi');
+      message.success('Ürün Sepete  Eklendi');
     }
   };
 
