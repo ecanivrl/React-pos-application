@@ -127,7 +127,7 @@ const CartTotals = () => {
               message.success('Sepetteki bütün ürünler silindi');
             }}
           >
-            Temizle
+            Tümünü Sil
           </Button>
         </div>
       </div>
