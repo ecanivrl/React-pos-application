@@ -5,6 +5,8 @@ import Header from '../components/header/Header';
 import { increase, decrease, deleteCart } from '../redux/cartSlice';
 import { PlusCircleOutlined, MinusCircleOutlined } from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux';
+import { SmileTwoTone } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
 
 const CartPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -13,7 +15,7 @@ const CartPage = () => {
 
   const columns = [
     {
-      title: 'Üürün Görseli',
+      title: 'Ürün Görseli',
       dataIndex: 'img',
       key: 'img',
       width: '125px',
@@ -52,7 +54,13 @@ const CartPage = () => {
           <Button
             onClick={() => {
               dispatch(increase(record));
-              message.success(`${record.title}  isimli Ürün Sepete 1 Adet Daha Eklendi, toplam: ${record.quantity + 1} adet oldu`);
+              message.success(
+                `${
+                  record.title
+                }  isimli Ürün Sepete 1 Adet Daha Eklendi, toplam: ${
+                  record.quantity + 1
+                } adet oldu`
+              );
             }}
             type="primary"
             size="small"
@@ -66,11 +74,15 @@ const CartPage = () => {
             onClick={() => {
               if (record.quantity === 1) {
                 dispatch(decrease(record));
-                message.success(`${record.title} adlı ürün sepetinizden silindi`);
+                message.success(
+                  `${record.title} adlı ürün sepetinizden silindi`
+                );
               }
               if (record.quantity > 1) {
                 dispatch(decrease(record));
-                message.success(`${record.title}  isimli Ürün Sepetten 1 Adet Daha Silindi 
+                message.success(`${
+                  record.title
+                }  isimli Ürün Sepetten 1 Adet Daha Silindi 
                 toplam: ${record.quantity - 1} adet kaldı`);
               }
             }}
@@ -113,38 +125,54 @@ const CartPage = () => {
   return (
     <>
       <Header />
-      <div className="px-6">
+      <div className="px-6 sm:pb-20 pb-0">
         <h1 className="text-3xl font-bold text-center pb-5">Sepet Detay</h1>
-        <Table
-          className="ecani overflow-auto w-full max-h-[340px] border  rounded-md"
-          dataSource={cart.cartItems}
-          columns={columns}
-          bordered
-          pagination={false}
-        />
-        <div className="cart-total flex justify-end mt-4">
-          <Card className="md:w-72 w-full">
-            <div className="flex justify-between">
-              <span>Ara Toplam</span>
-              <span>549.00₺</span>
+        <div className="flex flex-row gap-4 max-[1000px]:flex-col">
+          {cart.cartItems.length > 0 ? (
+            <Table
+              className="ecani custom-horizontal-scrollbar overflow-auto w-full max:h-[540px]  max-[1000px]:h-80 border  rounded-md"
+              dataSource={cart.cartItems}
+              columns={columns}
+              bordered
+              pagination={false}
+            />
+          ) : (
+            <div className='w-full h-96 flex justify-center items-center'>
+              <Link to={"/"}>
+              <div className="flex flex-col justify-center gap-5 items-center border-red-500 border sm:p-20 p-10 rounded-xl">
+              <h1 className="sm:text-5xl text-2xl font-bold text-red-600">sepet boş</h1>
+              <h1 className="text-2xl font-bold text-green-600">Alışverişe Git</h1>
             </div>
-            <div className="flex justify-between my-2">
-              <span>Ara Toplam</span>
-              <span className="text-red-600">43.92₺</span>
+              </Link>
             </div>
-            <div className="flex justify-between">
-              <b>Toplam</b>
-              <b>592.92₺</b>
-            </div>
-            <Button
-              onClick={() => setIsModalOpen(true)}
-              type="primary"
-              className="mt-4 w-full"
-              size="large"
-            >
-              Sipariş Oluştur
-            </Button>
-          </Card>
+          )}
+
+         {cart.cartItems.length > 0 && (
+           <div className="cart-total flex justify-end">
+           <Card className="md:w-72 w-full h-48">
+             <div className="flex justify-between">
+               <span>Ara Toplam</span>
+               <span>549.00₺</span>
+             </div>
+             <div className="flex justify-between my-2">
+               <span>Ara Toplam</span>
+               <span className="text-red-600">43.92₺</span>
+             </div>
+             <div className="flex justify-between">
+               <b>Toplam</b>
+               <b>592.92₺</b>
+             </div>
+             <Button
+               onClick={() => setIsModalOpen(true)}
+               type="primary"
+               className="mt-4 w-full"
+               size="large"
+             >
+               Sipariş Oluştur
+             </Button>
+           </Card>
+         </div>
+         )}
         </div>
       </div>
       <CreateBill setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen} />
