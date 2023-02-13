@@ -7,10 +7,24 @@ import {
   SmileTwoTone,
 } from '@ant-design/icons';
 import { deleteCart, increase, decrease, reset } from '../../redux/cartSlice';
+import { useNavigate } from 'react-router-dom';
 
 const CartTotals = () => {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const gettı = () => {
+    message.success({
+      content: 'Sepet Detayına Yönlendiriliyorsunuz...',
+      icon: <SmileTwoTone twoToneColor="#52c41a" />,
+    });
+    setTimeout(() => {
+      navigate('/cart');
+      
+
+    }, 1000);
+  }
 
   return (
     <div className="cart h-[calc(100vh_-_90px)] flex flex-col">
@@ -25,25 +39,24 @@ const CartTotals = () => {
               key={item._id}
             >
               <div className="flex items-center">
-               <Popconfirm
-                placement="bottom"
-               title="Bu ürünü sepetten silmek istediğinize emin misiniz?"
-                okText="Evet"
-                cancelText="Hayır"
-                onConfirm={() => {
-                  dispatch(deleteCart(item));
-                  message.success(
-                    `${item.title}  isimli Ürün Sepetten Silindi`
-                  );
-                }}
-               >
-               <img
-                 
-                  src={item.img}
-                  alt="item.img"
-                  className="w-14 h-14  object-cover cursor-pointer"
-                />
-               </Popconfirm>
+                <Popconfirm
+                  placement="bottom"
+                  title="Bu ürünü sepetten silmek istediğinize emin misiniz?"
+                  okText="Evet"
+                  cancelText="Hayır"
+                  onConfirm={() => {
+                    dispatch(deleteCart(item));
+                    message.success(
+                      `${item.title}  isimli Ürün Sepetten Silindi`
+                    );
+                  }}
+                >
+                  <img
+                    src={item.img}
+                    alt="item.img"
+                    className="w-14 h-14  object-cover cursor-pointer"
+                  />
+                </Popconfirm>
                 <div className="flex flex-col ml-2">
                   <b>{item.title}</b>
                   <span>
@@ -81,7 +94,9 @@ const CartTotals = () => {
                     if (item.quantity > 1) {
                       dispatch(decrease(item));
                       message.success(
-                        `${item.title}  isimli Üründen 1 Adet Silindi ${item.quantity - 1} adet kaldı`
+                        `${item.title}  isimli Üründen 1 Adet Silindi ${
+                          item.quantity - 1
+                        } adet kaldı`
                       );
                     }
                   }}
@@ -131,7 +146,14 @@ const CartTotals = () => {
           </div>
         </div>
         <div className="py-4 px-2">
-          <Button type="primary" size="middle" className="w-full">
+          <Button
+            // onClick={() => navigate('/cart')}
+            onClick={() => gettı()}
+            type="primary"
+            size="middle"
+            className="w-full"
+            disabled={cart.cartItems.length === 0}
+          >
             Sipariş Oluştur
           </Button>
           <Popconfirm
@@ -144,7 +166,7 @@ const CartTotals = () => {
             }}
           >
             <Button
-            style={{width:"100%"}}
+              style={{ width: '100%' }}
               disabled={cart.cartItems.length === 0}
               type="primary"
               danger

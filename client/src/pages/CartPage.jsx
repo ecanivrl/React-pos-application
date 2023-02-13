@@ -124,13 +124,12 @@ const CartPage = () => {
   return (
     <>
       <Header />
-      <div className="px-6 pb-20">
+      <div className="px-6">
         <h1 className="text-3xl font-bold text-center pb-5">Sepet Detay</h1>
-        <div className="flex flex-row gap-4 max-[1000px]:flex-col ecani custom-horizontal-scrollbar overflow-auto h-[550px]">
+        <div className="flex flex-row gap-4 max-[1000px]:flex-col ecani max-h-[610px] custom-horizontal-scrollbar overflow-auto pb-16">
           {cart.cartItems.length > 0 ? (
-            // max:h-[540px] max-[1000px]:h-80
             <Table
-              className="ecani custom-horizontal-scrollbar overflow-auto w-full h-[550px] rounded-md"
+              className="ecani custom-horizontal-scrollbar overflow-auto w-full  rounded-md"
               dataSource={cart.cartItems}
               columns={columns}
               bordered
@@ -185,6 +184,7 @@ const CartPage = () => {
                   type="primary"
                   className="mt-4 w-full"
                   size="large"
+                  disabled={cart.cartItems.length === 0}
                 >
                   Sipariş Oluştur
                 </Button>
