@@ -5,7 +5,6 @@ import Header from '../components/header/Header';
 import { increase, decrease, deleteCart } from '../redux/cartSlice';
 import { PlusCircleOutlined, MinusCircleOutlined } from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux';
-import { SmileTwoTone } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 
 const CartPage = () => {
@@ -125,71 +124,78 @@ const CartPage = () => {
   return (
     <>
       <Header />
-      <div className="px-6 sm:pb-20 pb-0">
+      <div className="px-6 pb-20">
         <h1 className="text-3xl font-bold text-center pb-5">Sepet Detay</h1>
-        <div className="flex flex-row gap-4 max-[1000px]:flex-col">
+        <div className="flex flex-row gap-4 max-[1000px]:flex-col ecani custom-horizontal-scrollbar overflow-auto h-[550px]">
           {cart.cartItems.length > 0 ? (
+            // max:h-[540px] max-[1000px]:h-80
             <Table
-              className="ecani custom-horizontal-scrollbar overflow-auto w-full max:h-[540px]  max-[1000px]:h-80 border  rounded-md"
+              className="ecani custom-horizontal-scrollbar overflow-auto w-full h-[550px] rounded-md"
               dataSource={cart.cartItems}
               columns={columns}
               bordered
               pagination={false}
             />
           ) : (
-            <div className='w-full h-96 flex justify-center items-center'>
-              <Link to={"/"}>
-              <div className="flex flex-col justify-center gap-5 items-center border-red-500 border sm:p-20 p-10 rounded-xl">
-              <h1 className="sm:text-5xl text-2xl font-bold text-red-600">sepet boş</h1>
-              <h1 className="text-2xl font-bold text-green-600">Alışverişe Git</h1>
-            </div>
+            <div className="w-full h-96 flex justify-center items-center">
+              <Link to={'/'}>
+                <div className="flex flex-col justify-center gap-5 items-center border-red-500 border sm:p-20 p-10 rounded-xl">
+                  <h1 className="sm:text-5xl text-2xl font-bold text-red-600">
+                    sepet boş
+                  </h1>
+                  <h1 className="text-2xl font-bold text-green-600">
+                    Alışverişe Git
+                  </h1>
+                </div>
               </Link>
             </div>
           )}
 
-         {cart.cartItems.length > 0 && (
-           <div className="cart-total flex justify-end">
-           <Card className="md:w-72 w-full h-52">
-             <div className="flex justify-between">
-               <span>Ara Toplam</span>
-               <span>{cart.total > 0 ? cart.total.toFixed(2) : 0}₺</span>
-             </div>
-             <div className="flex justify-between py-2">
-            <b>KDV %{cart.tax}</b>
-            <span className="text-red-500">
-              +
-              {(cart.total * cart.tax) / 100 > 0
-                ? ((cart.total * cart.tax) / 100).toFixed(2)
-                : 0}
-              ₺
-            </span>
-          </div>
-          <div className="flex justify-between">
-            <b className="text-green-500 sm:text-xl text-lg">Net Tutar</b>
-            <span className="text-xl">
-              {cart.total + (cart.total * cart.tax) / 100 > 0 ? (
-                (cart.total + (cart.total * cart.tax) / 100).toFixed(2)
-              ) : (
-                <span>0.00</span>
-              )}
-              ₺
-            </span>
-          </div>
-         
-             <Button
-               onClick={() => setIsModalOpen(true)}
-               type="primary"
-               className="mt-4 w-full"
-               size="large"
-             >
-               Sipariş Oluştur
-             </Button>
-             <Link to={"/"}>
-            <div className='text-red-500 text-center mt-1 w-full'>Yeni ürünler İçin Magazaya Git</div>
-          </Link>
-           </Card>
-         </div>
-         )}
+          {cart.cartItems.length > 0 && (
+            <div className="cart-total flex justify-end">
+              <Card className="w-72 max-[1000px]:w-full h-52 bg-gray-100">
+                <div className="flex justify-between">
+                  <span>Ara Toplam</span>
+                  <span>{cart.total > 0 ? cart.total.toFixed(2) : 0}₺</span>
+                </div>
+                <div className="flex justify-between py-2">
+                  <b>KDV %{cart.tax}</b>
+                  <span className="text-red-500">
+                    +
+                    {(cart.total * cart.tax) / 100 > 0
+                      ? ((cart.total * cart.tax) / 100).toFixed(2)
+                      : 0}
+                    ₺
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <b className="text-green-500 sm:text-xl text-lg">Net Tutar</b>
+                  <span className="text-xl">
+                    {cart.total + (cart.total * cart.tax) / 100 > 0 ? (
+                      (cart.total + (cart.total * cart.tax) / 100).toFixed(2)
+                    ) : (
+                      <span>0.00</span>
+                    )}
+                    ₺
+                  </span>
+                </div>
+
+                <Button
+                  onClick={() => setIsModalOpen(true)}
+                  type="primary"
+                  className="mt-4 w-full"
+                  size="large"
+                >
+                  Sipariş Oluştur
+                </Button>
+                <Link to={'/'}>
+                  <div className="text-red-500 text-center mt-1 w-full">
+                    Yeni ürünler İçin Magazaya Git
+                  </div>
+                </Link>
+              </Card>
+            </div>
+          )}
         </div>
       </div>
       <CreateBill setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen} />
