@@ -52,7 +52,7 @@ const CartPage = () => {
           <Button
             onClick={() => {
               dispatch(increase(record));
-              message.success('Sepete aynı üründen 1 adet daha  Eklendi');
+              message.success(`${record.title}  isimli Ürün Sepete 1 Adet Daha Eklendi, toplam: ${record.quantity + 1} adet oldu`);
             }}
             type="primary"
             size="small"
@@ -66,11 +66,12 @@ const CartPage = () => {
             onClick={() => {
               if (record.quantity === 1) {
                 dispatch(decrease(record));
-                message.success('Ürün Sepetinizden Silindi');
+                message.success(`${record.title} adlı ürün sepetinizden silindi`);
               }
               if (record.quantity > 1) {
                 dispatch(decrease(record));
-                message.success('Sepetinizdeki aynı  ürün adedinden 1 azaldı');
+                message.success(`${record.title}  isimli Ürün Sepetten 1 Adet Daha Silindi 
+                toplam: ${record.quantity - 1} adet kaldı`);
               }
             }}
             type="primary"

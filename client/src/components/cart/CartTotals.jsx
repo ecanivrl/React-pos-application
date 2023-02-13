@@ -1,10 +1,10 @@
-import { Button, message } from 'antd';
+import { Button, Popconfirm, message } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   ClearOutlined,
   PlusCircleOutlined,
   MinusCircleOutlined,
-  SmileTwoTone
+  SmileTwoTone,
 } from '@ant-design/icons';
 import { deleteCart, increase, decrease, reset } from '../../redux/cartSlice';
 
@@ -13,7 +13,7 @@ const CartTotals = () => {
   const dispatch = useDispatch();
 
   return (
-    <div className="cart h-full max-h-[calc(100vh_-_90px)] flex flex-col">
+    <div className="cart h-[calc(100vh_-_90px)] flex flex-col">
       <h2 className="bg-blue-600 text-center py-4 text-white font-bold text-sm sm:text-lg">
         Sepetteki Ürünler
       </h2>
@@ -25,13 +25,25 @@ const CartTotals = () => {
               key={item._id}
             >
               <div className="flex items-center">
-                <img
-                  onClick={() => setTimeout(dispatch(deleteCart(item))
-                    ,2000)}
+               <Popconfirm
+                placement="bottom"
+               title="Bu ürünü sepetten silmek istediğinize emin misiniz?"
+                okText="Evet"
+                cancelText="Hayır"
+                onConfirm={() => {
+                  dispatch(deleteCart(item));
+                  message.success(
+                    `${item.title}  isimli Ürün Sepetten Silindi`
+                  );
+                }}
+               >
+               <img
+                 
                   src={item.img}
-                  alt=""
+                  alt="item.img"
                   className="w-14 h-14  object-cover cursor-pointer"
                 />
+               </Popconfirm>
                 <div className="flex flex-col ml-2">
                   <b>{item.title}</b>
                   <span>
@@ -43,7 +55,10 @@ const CartTotals = () => {
                 <Button
                   onClick={() => {
                     dispatch(increase(item));
-                    message.success(`${item.title}  isimli Ürün Sepete 1 Adet Daha Eklendi`);
+                    message.success(
+                      `${item.title}  isimli Ürün Sepete 1 Adet Daha Eklendi
+                      toplam: ${item.quantity + 1} adet oldu`
+                    );
                   }}
                   type="primary"
                   size="small"
@@ -57,12 +72,16 @@ const CartTotals = () => {
                   onClick={() => {
                     if (item.quantity === 1) {
                       dispatch(decrease(item));
-                      message.success(`${item.title}  isimli Ürün Sepetten Silindi`);
+                      message.success(
+                        `${item.title}  isimli Ürün Sepetten Silindi
+                        ${item.quantity - 1} adet kaldı 
+                        `
+                      );
                     }
                     if (item.quantity > 1) {
                       dispatch(decrease(item));
                       message.success(
-                        `${item.title}  isimli Üründen 1 Adet Silindi`
+                        `${item.title}  isimli Üründen 1 Adet Silindi ${item.quantity - 1} adet kaldı`
                       );
                     }
                   }}
@@ -115,20 +134,27 @@ const CartTotals = () => {
           <Button type="primary" size="middle" className="w-full">
             Sipariş Oluştur
           </Button>
-          <Button
-          disabled={cart.cartItems.length === 0}
-            type="primary"
-            danger
-            size="middle"
-            className="w-full mt-2 flex justify-center items-center"
-            icon={<ClearOutlined />}
-            onClick={() => {
+          <Popconfirm
+            title="Sepetteki bütün ürünler silinecek. Emin misiniz?"
+            okText="Evet"
+            cancelText="Hayır"
+            onConfirm={() => {
               dispatch(reset());
               message.success('Sepetteki bütün ürünler silindi');
             }}
           >
-            Tümünü Sil
-          </Button>
+            <Button
+            style={{width:"100%"}}
+              disabled={cart.cartItems.length === 0}
+              type="primary"
+              danger
+              size="middle"
+              className="!w-full mt-2 flex justify-center items-center"
+              icon={<ClearOutlined />}
+            >
+              Tümünü Sil
+            </Button>
+          </Popconfirm>
         </div>
       </div>
     </div>

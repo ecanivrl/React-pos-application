@@ -9,7 +9,7 @@ const ProductItem = ({ item }) => {
   const handleClick = () => {
     dispatch(addProduct({ ...item, quantity: 1 }));
     if (cart.cartItems.find((cartItem) => cartItem._id === item._id)) {
-      message.success(`${item.title} isimli Ürün Sepete 1 Adet Daha Eklendi`);
+      message.success(`${item.title} Sepete Eklendi toplam: ${cart.cartItems.find((cartItem) => cartItem._id === item._id).quantity + 1} adet oldu`);
     } else {
       message.success(`${item.title}  Sepete  Eklendi`);
     }
