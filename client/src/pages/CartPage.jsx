@@ -128,13 +128,15 @@ const CartPage = () => {
         <h1 className="text-3xl font-bold text-center pb-5">Sepet Detay</h1>
         <div className="flex flex-row gap-4 max-[1000px]:flex-col ecani max-h-[610px] custom-horizontal-scrollbar overflow-auto pb-16">
           {cart.cartItems.length > 0 ? (
-            <Table
-              className="ecani custom-horizontal-scrollbar overflow-auto w-full  rounded-md"
+           <div className='categories overflow-auto custom-horizontal-scrollbar w-full pb-2'>
+             <Table
+              className="ecani custom-horizontal-scrollbar overflow-auto min-w-[700px] rounded-md"
               dataSource={cart.cartItems}
               columns={columns}
               bordered
               pagination={false}
             />
+           </div>
           ) : (
             <div className="w-full h-96 flex justify-center items-center">
               <Link to={'/'}>

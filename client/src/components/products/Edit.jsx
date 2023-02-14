@@ -1,13 +1,21 @@
-import { Button,  Form,  Input,  message, Modal, Select, Table } from 'antd';
+import {
+  Button,
+  Form,
+  Input,
+  message,
+  Modal,
+  Popconfirm,
+  Select,
+  Table,
+} from 'antd';
 import React, { useState, useEffect } from 'react';
 
 const Edit = () => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [editingItem, setEditingItem] = useState({})
+  const [editingItem, setEditingItem] = useState({});
   const [form] = Form.useForm();
-
 
   useEffect(() => {
     const getProducts = async () => {
@@ -27,9 +35,12 @@ const Edit = () => {
       try {
         const res = await fetch(`http://localhost:5000/api/categories/get-all`);
         const data = await res.json();
-        data && setCategories(data.map((item) => {
-          return{...item, value: item.title}
-         }));
+        data &&
+          setCategories(
+            data.map((item) => {
+              return { ...item, value: item.title };
+            })
+          );
       } catch (error) {
         console.log(error);
       }
@@ -48,10 +59,10 @@ const Edit = () => {
       message.success('Ürün başarıyla güncellendi.');
       setProducts(
         products.map((item) => {
-         if(item._id === editingItem._id){
-           return values
-         }
-          return item
+          if (item._id === editingItem._id) {
+            return values;
+          }
+          return item;
         })
       );
     } catch (error) {
@@ -61,29 +72,27 @@ const Edit = () => {
   };
 
   const deleteCategory = async (id) => {
-   if(window.confirm('Ürünü silmek istediğinize emin misiniz?')){
-    try {
-      fetch(`http://localhost:5000/api/products/delete-product`, {
-        method: 'DELETE',
-        body: JSON.stringify({ productId: id }),
-        headers: { 'Content-type': 'application/json; charset=UTF-8' },
-      });
-      message.success(` Ürün başarıyla silindi.`);
-     
-      setProducts(products.filter((item) => item._id !== id));
-    } catch (error) {
-      message.success(`Bir şeyler yanlış gitti.`);
-      console.log(error);
-    }
-   }
+      try {
+        fetch(`http://localhost:5000/api/products/delete-product`, {
+          method: 'DELETE',
+          body: JSON.stringify({ productId: id }),
+          headers: { 'Content-type': 'application/json; charset=UTF-8' },
+        });
+        message.success(`Ürün başarıyla silindi.`);
+
+        setProducts(products.filter((item) => item._id !== id));
+      } catch (error) {
+        message.success(`Bir şeyler yanlış gitti.`);
+        console.log(error);
+      }
   };
-  
+
   const CloseModalAll = () => {
     setTimeout(() => {
-      setIsEditModalOpen(false)
-      window.location.reload()
-    },1200)
-  }
+      setIsEditModalOpen(false);
+      window.location.reload();
+    }, 1200);
+  };
 
   const columns = [
     {
@@ -97,10 +106,16 @@ const Edit = () => {
     {
       title: 'Ürün Görseli',
       dataIndex: 'img',
-      width: "5%",
-      render: (img) => <div className='flex justify-center items-center mx-auto'>
-        <img src={img} alt="" className="md:w-24 md:h-24 h-10 w-10 rounded-full object-cover cursor-pointer" />
-      </div>,
+      width: '5%',
+      render: (img) => (
+        <div className="flex justify-center items-center mx-auto">
+          <img
+            src={img}
+            alt=""
+            className="md:w-24 md:h-24 h-10 w-10 rounded-full object-cover cursor-pointer"
+          />
+        </div>
+      ),
     },
     {
       title: 'Ürün Fiyatı',
@@ -119,20 +134,31 @@ const Edit = () => {
       render: (text, record) => {
         return (
           <div>
-            <Button type="link" className="pl-0" onClick={() => {
-              setIsEditModalOpen(true)
-              setEditingItem(record)
-            }}>
-              Düzenle
-            </Button>
-            
             <Button
               type="link"
-              danger
-              onClick={() => deleteCategory(record._id)}
+              className="pl-0"
+              onClick={() => {
+                setIsEditModalOpen(true);
+                setEditingItem(record);
+              }}
             >
-              Sil
+              Düzenle
             </Button>
+
+            <Popconfirm
+              title="Ürünü silmek istediğinize emin misiniz?"
+              onConfirm={() => deleteCategory(record._id)}
+              okText="Evet"
+              cancelText="Hayır"
+            >
+              <Button
+                type="link"
+                danger
+                // onClick={() => deleteCategory(record._id)}
+              >
+                Sil
+              </Button>
+            </Popconfirm>
           </div>
         );
       },
@@ -141,23 +167,30 @@ const Edit = () => {
 
   return (
     <>
-      <div className="md:h-[500px] h-[400px] overflow-y-auto ecani">
-      <Table
-        scroll={{ x: 500 }}
-        className=""
-        bordered
-        dataSource={products}
-        columns={columns}
-        rowKey={'_id'}
-      />
-    </div>
-    <Modal
+      <div className=" h-[500px] overflow-y-auto ecani">
+        <div className="categories overflow-auto custom-horizontal-scrollbar w-full">
+          <Table
+            scroll={{ x: 500 }}
+            className="ecani custom-horizontal-scrollbar overflow-auto min-w-[750px] rounded-md"
+            bordered
+            dataSource={products}
+            columns={columns}
+            rowKey={'_id'}
+          />
+        </div>
+      </div>
+      <Modal
         title="Yeni Ürün Ekle"
         open={isEditModalOpen}
         onCancel={() => setIsEditModalOpen(false)}
         footer={false}
       >
-        <Form layout="vertical" onFinish={onFinish} form={form} initialValues={editingItem}>
+        <Form
+          layout="vertical"
+          onFinish={onFinish}
+          form={form}
+          initialValues={editingItem}
+        >
           <Form.Item
             name={'title'}
             label="Ürün Ekle"
