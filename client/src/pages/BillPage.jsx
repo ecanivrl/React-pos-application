@@ -5,7 +5,7 @@ import PrintBill from '../components/bills/PrintBill';
 
 const BillPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [billItems, setBillItems] = useState();
+  const [billItems, setBillItems] = useState([]);
   const [customer, setCustomer] = useState();
 
 
