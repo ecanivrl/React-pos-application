@@ -107,7 +107,7 @@ const CartTotals = () => {
                 />
               </div>
             </li>
-          ))
+          )).reverse()
         ) : (
           <div className="flex h-full justify-center gap-x-5 items-center ">
             <SmileTwoTone />

@@ -29,6 +29,7 @@ body {
 .custom-horizontal-scrollbar {
   &::-webkit-scrollbar {
     height: 4px;
+    width: 10px;
   }
 
   &::-webkit-scrollbar-track {

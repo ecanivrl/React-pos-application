@@ -5,7 +5,9 @@ import PrintBill from '../components/bills/PrintBill';
 
 const BillPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [billItems, setBillItems] = useState()
+  const [billItems, setBillItems] = useState();
+  const [customer, setCustomer] = useState();
+
 
   useEffect(() => {
     const getBillItems = async () => {
@@ -20,14 +22,12 @@ const BillPage = () => {
     getBillItems();
   }, []);
 
-
-
   const columns = [
     {
       title: 'Müşteri Adı',
       dataIndex: 'customerName',
       key: 'customerName',
-      render: (text) => <span className='text-xs'>{text}</span>,
+      render: (text) => <span className="text-xs">{text}</span>,
     },
     {
       title: 'Telefon Numarası',
@@ -41,31 +41,28 @@ const BillPage = () => {
       render: (text) => <span>{new Date(text).toLocaleDateString()}</span>,
     },
     {
-      "title": "Sipariş Edilen Ürün",
-      "dataIndex": "productTitle",
-      "key": "productTitle",
-    },
-   
-    {
-      title: "Ödeme Şekli",
-      dataIndex: "paymentMode",
-      key: "paymentMode",
+      title: 'Ödeme Şekli',
+      dataIndex: 'paymentMode',
+      key: 'paymentMode',
     },
     {
       title: 'Toplam Fiyat',
-      dataIndex: "totalAmount",
-      key: "totalAmount",
-      render: (text) => <span className='font-bold'>{text} ₺</span>,
+      dataIndex: 'totalAmount',
+      key: 'totalAmount',
+      render: (text) => <span className="font-bold">{text} ₺</span>,
     },
     {
       title: 'İşlemler',
       dataIndex: 'actions',
       key: 'actions',
-      render: (text, record) => (
-        <div className='flex justify-center'>
+      render: (_, record) => (
+        <div className="flex justify-center">
           <Button
-            onClick={() => setIsModalOpen(true)}
-            type="primary"  
+            onClick={() => {
+              setIsModalOpen(true);
+              setCustomer(record);
+            }}
+            type="primary"
             className="mr-2"
             size="small"
           >
@@ -73,24 +70,25 @@ const BillPage = () => {
           </Button>
         </div>
       ),
-    }
-   
+    },
   ];
 
   return (
     <>
       <Header />
-      <div className="px-6">
-        <h1 className='text-4xl font-bold text-center mb-4'>Faturalar</h1>
-        <Table
-          dataSource={billItems}
-          columns={columns}
-          bordered
-          pagination={false}
-        />
-        
+      <div className="px-6 pb-0">
+        <h1 className="text-4xl font-bold text-center mb-4">Faturalar</h1>
+        <div className="categories overflow-auto custom-horizontal-scrollbar w-full h-[500px] pb-10">
+          <Table
+            className="ecani pb-2 custom-horizontal-scrollbar overflow-auto min-w-[700px] rounded-md "
+            dataSource={billItems}
+            columns={columns}
+            bordered
+            pagination={false}
+          />
+        </div>
       </div>
-     <PrintBill setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen}/>
+      <PrintBill setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen} customer={customer}/>
     </>
   );
 };
