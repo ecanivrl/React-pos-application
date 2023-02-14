@@ -1,8 +1,14 @@
 import { Button, Modal } from 'antd';
-import React from 'react';
+import React,{useRef} from 'react';
+import {useReactToPrint} from 'react-to-print';
 
 const PrintBill = ({ isModalOpen, setIsModalOpen, customer }) => {
-  console.log(customer);
+  const componentRef = useRef();
+
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
+
 
   return (
     <Modal
@@ -13,7 +19,7 @@ const PrintBill = ({ isModalOpen, setIsModalOpen, customer }) => {
       width={800}
     >
         
-      <section className="py-20 bg-black max-h-[469px] overflow-auto bill">
+      <section className={`max-h-[469px] py-20 bg-black  overflow-auto bill`} ref={componentRef}>
         <div className="max-w-5xl mx-auto bg-white px-6">
           <article className="overflow-hidden">
             <div className="logo my-6">
@@ -23,7 +29,7 @@ const PrintBill = ({ isModalOpen, setIsModalOpen, customer }) => {
               <div className="grid  grid-cols-[repeat(auto-fill,_110px)] gap-x-20 gap-y-5">
                 <div className="text-md text-slate-500">
                   <p className="font-bold text-slate-700">Fatura Detayı:</p>
-                  <p>Unwrapped</p>
+                  <p>{customer?.customerName}</p>
                   <p> Fake Street 123</p>
                   <p> San Javier </p>
                   <p> CA 1234</p>
@@ -210,7 +216,9 @@ const PrintBill = ({ isModalOpen, setIsModalOpen, customer }) => {
         </div>
       </section>
       <div className='flex justify-end mt-4'>
-        <Button type='primary' size='large'>Yazdır</Button>
+        <Button type='primary' size='large' onClick={() => {
+          handlePrint()
+        }}>Yazdır</Button>
       </div>
     </Modal>
   );

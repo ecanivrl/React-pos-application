@@ -88,7 +88,7 @@ const BillPage = () => {
           />
         </div>
       </div>
-      <PrintBill setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen} customer={customer}/>
+      <PrintBill setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen} customer={customer} />
     </>
   );
 };

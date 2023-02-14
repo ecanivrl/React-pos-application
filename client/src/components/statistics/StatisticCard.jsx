@@ -2,7 +2,7 @@ import React from 'react'
 
 const StatisticCard = ({title, amount, img}) => {
   return (
-    <div className="card-item bg-gray-800 p-8 rounded-lg">
+    <div className="card-item bg-gray-800 p-4 rounded-lg">
             <div className='flex gap-x-4'>
               <div className='rounded-full bg-white w-16 h-16 p-3'>
                 <img className='' src={img} alt="" />
