@@ -6,7 +6,20 @@ import { Area, Pie } from '@ant-design/plots';
 
 const StatisticPage = () => {
   const [data, setData] = useState([]);
-console.log(data)
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    const getProducts = async () => {
+      try {
+        const res = await fetch(`http://localhost:5000/api/products/get-all`);
+        const data = await res.json();
+        setProducts(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getProducts();
+  }, []);
+
   useEffect(() => {
     asyncFetch();
   }, []);
@@ -21,33 +34,6 @@ console.log(data)
         console.log('fetch data failed', error);
       });
   };
-
-  // const data2 = [
-  //   {
-  //     type: '分类一',
-  //     value: 27,
-  //   },
-  //   {
-  //     type: '分类二',
-  //     value: 25,
-  //   },
-  //   {
-  //     type: '分类三',
-  //     value: 18,
-  //   },
-  //   {
-  //     type: '分类四',
-  //     value: 15,
-  //   },
-  //   {
-  //     type: '分类五',
-  //     value: 10,
-  //   },
-  //   {
-  //     type: '其他',
-  //     value: 5,
-  //   },
-  // ];
 
   const config = {
     data,
@@ -91,7 +77,7 @@ console.log(data)
           overflow: 'hidden',
           textOverflow: 'ellipsis',
         },
-        content: 'Toplam\nAlım',
+        content: 'ALIŞ\nSATIŞ',
       },
     },
   };
@@ -99,6 +85,11 @@ console.log(data)
 
   const totalAmount = () => {
     const amount = data.reduce((total, item) => item.totalAmount + total, 0)
+    return amount.toFixed(2)
+  }
+
+  const Total = () => {
+    const amount = data.reduce((total, item) => item.subTotal + total, 0)
     return amount.toFixed(2)
   }
 
@@ -112,7 +103,7 @@ console.log(data)
         <div className="statistic-section">
           <h2 className="text-lg">
             Hoş geldin{' '}
-            <span className="text-[#1F8A70] font-bold text-lg">ADMIN</span>
+            <span className="text-[#1F8A70] font-bold text-lg">Ecani VRL</span>
           </h2>
         </div>
         {/* grid-cols-[repeat(auto-fill,_330px)] */}
@@ -120,22 +111,23 @@ console.log(data)
           <div className="statistic-cards grid xl:grid-cols-4 md:grid-cols-2 my-2 gap-4 justify-center">
             <StatisticCard
               title={'Toplam Müşteri'}
-              amount={10}
+              amount={data?.length}
               img={'images/user.png'}
+            />
+            <StatisticCard
+              title={'Toplam Satış'}
+              amount={Total()}
+              img={'images/sale.png'}
             />
             <StatisticCard
               title={'Toplam Kazanç'}
               amount={totalAmount()} 
               img={'images/money.png'}
             />
-            <StatisticCard
-              title={'Toplam Satış'}
-              amount={data?.length}
-              img={'images/sale.png'}
-            />
+            
             <StatisticCard
               title={'Toplam Ürün'}
-              amount={1004}
+              amount={products?.length}
               img={'images/product.png'}
             />
           </div>
