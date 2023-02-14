@@ -34,7 +34,7 @@ const Products = ({ categories }) => {
       </div>
       <div
       onClick={() => navigate('/products')}
-        className="products-item min-h-[180px] border shadow-lg cursor-pointer transition-all select-none bg-orange-500
+        className="products-item min-h-[150px] border shadow-lg cursor-pointer transition-all select-none bg-orange-500
       flex justify-center items-center"
       >
         <EditOutlined className="sm:text-3xl text-lg text-white hover:opacity-90" />

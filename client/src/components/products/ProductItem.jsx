@@ -22,7 +22,7 @@ const ProductItem = ({ item }) => {
     >
       <div className="products-img">
         <img
-          className="h-28 object-contain  w-full border-b"
+          className="h-28 w-full border-b object-cover"
           src={item.img}
           alt=""
         />
