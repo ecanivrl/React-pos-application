@@ -8,7 +8,6 @@ const Products = ({ categories }) => {
   const [products, setProducts] = useState([]);
   const [isAddModalOpen, setAddIsModalOpen] = useState(false);
   const navigate = useNavigate();
-
   useEffect(() => {
     const getProducts = async () => {
       try {
