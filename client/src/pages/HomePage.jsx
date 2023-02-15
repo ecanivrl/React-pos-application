@@ -62,11 +62,11 @@ const HomePage = () => {
             setProducts={setProducts}
             search={search}
           />
-          <div className='md:hidden'>
-            <CartTotals />
+          <div className='md:hidden border border-gray-500'>
+            <CartTotals className=""/>
           </div>
         </div>
-        <div className="cart-wrapper min-w-[300px] md:-mr-[24px] md:-mt-[24px] border max-md:hidden">
+        <div className="cart-wrapper min-w-[325px] md:-mr-[24px] md:-mt-[24px] border max-md:hidden">
           <CartTotals />
         </div>
       </div>

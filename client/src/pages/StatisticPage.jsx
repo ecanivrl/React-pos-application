@@ -135,7 +135,7 @@ const StatisticPage = () => {
             <div className="lg:w-1/2 w-full h-72">
               <Area {...config} />
             </div>
-            <div className="lg:w-1/2 w-full h-72">
+            <div className="lg:w-1/2 w-full h-80">
               <Pie {...config2} />
             </div>
           </div>

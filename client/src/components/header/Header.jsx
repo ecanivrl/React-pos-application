@@ -41,6 +41,7 @@ const Header = ({search, setSearch}) => {
             placeholder="Ürün ara..."
             prefix={<SearchOutlined />}
             className="rounded-full max-w-[800px]"
+            onClick={() => pathname !== '/' && navigate('/')}
             onChange={(e) => setSearch(e.target.value.toLowerCase())}
           />
         </div>

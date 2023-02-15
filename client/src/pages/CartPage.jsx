@@ -258,7 +258,7 @@ const CartPage = () => {
                 columns={columns}
                 bordered
                 pagination={false}
-                rowKey={cart._id}
+                rowKey={"_id"}
               />
             </div>
           ) : (
