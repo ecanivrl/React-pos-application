@@ -12,7 +12,7 @@ import { Badge, Input, Popconfirm, message } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-const Header = () => {
+const Header = ({search, setSearch}) => {
   const cart = useSelector((state) => state.cart);
   const navigate = useNavigate();
   const LogOut = () => {
@@ -39,6 +39,7 @@ const Header = () => {
             placeholder="Ürün ara..."
             prefix={<SearchOutlined />}
             className="rounded-full max-w-[800px]"
+            onChange={(e) => setSearch(e.target.value.toLowerCase())}
           />
         </div>
         <div

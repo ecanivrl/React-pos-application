@@ -10,7 +10,6 @@ const Edit = ({
   const [editingRow, setEditingRow] = useState({});
 
   const onFinish = (values) => {
-    console.log(values);
     try {
       fetch('http://localhost:5000/api/categories/update-category', {
         method: 'PUT',
