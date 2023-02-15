@@ -258,12 +258,13 @@ const CartPage = () => {
                 columns={columns}
                 bordered
                 pagination={false}
+                rowKey={cart._id}
               />
             </div>
           ) : (
-            <div className="w-full h-96 flex justify-center items-center">
+            <div className="w-full h-96 flex justify-center items-center ">
               <Link to={'/'}>
-                <div className="flex flex-col justify-center gap-5 items-center border-red-500 border sm:p-20 p-10 rounded-xl">
+                <div className="canini flex flex-col justify-center gap-5 items-center border-red-500 border sm:p-20 p-10 rounded-xl">
                   <h1 className="sm:text-5xl text-2xl font-bold text-red-600">
                     sepet boş
                   </h1>

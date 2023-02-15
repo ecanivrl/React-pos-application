@@ -9,12 +9,14 @@ import {
   LogoutOutlined,
 } from '@ant-design/icons';
 import { Badge, Input, Popconfirm, message } from 'antd';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 const Header = ({search, setSearch}) => {
   const cart = useSelector((state) => state.cart);
+  const {pathname} = useLocation();
   const navigate = useNavigate();
+  
   const LogOut = () => {
     if (localStorage.getItem('posUser')) {
       localStorage.removeItem('posUser');

@@ -12,6 +12,11 @@ body {
   @apply bg-gray-50;
 }
 
+.canini{
+  -webkit-box-shadow: 1px 38px 127px 13px rgb(58, 230, 27);
+-moz-box-shadow: 1px 38px 127px 13px rgb(30, 222, 68);
+box-shadow: 1px 38px 127px 13px rgb(233, 0, 54);
+}
 .ecani::-webkit-scrollbar {
   display: none;
 }

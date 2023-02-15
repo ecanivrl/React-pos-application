@@ -8,7 +8,7 @@ const HomePage = () => {
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
   const [filtered, setFiltered] = useState([]);
- const [search, setSearch] = useState("")
+  const [search, setSearch] = useState('');
   useEffect(() => {
     const getCategories = async () => {
       try {
@@ -62,8 +62,11 @@ const HomePage = () => {
             setProducts={setProducts}
             search={search}
           />
+          <div className='md:hidden'>
+            <CartTotals />
+          </div>
         </div>
-        <div className="cart-wrapper min-w-[300px] md:-mr-[24px] md:-mt-[24px] border">
+        <div className="cart-wrapper min-w-[300px] md:-mr-[24px] md:-mt-[24px] border max-md:hidden">
           <CartTotals />
         </div>
       </div>

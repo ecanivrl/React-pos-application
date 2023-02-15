@@ -219,6 +219,7 @@ const CustomerPage = () => {
             columns={columns}
             bordered
             pagination={false}
+            rowKey={(record) => record._id}
           />
         </div>
       </div>

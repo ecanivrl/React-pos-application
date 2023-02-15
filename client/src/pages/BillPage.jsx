@@ -210,6 +210,7 @@ const BillPage = () => {
             columns={columns}
             bordered
             pagination={false}
+            rowKey={(record) => record._id}
           />
         </div>
       </div>

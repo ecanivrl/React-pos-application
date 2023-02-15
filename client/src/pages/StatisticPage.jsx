@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import Header from '../components/header/Header';
 import StatisticCard from '../components/statistics/StatisticCard';
 import { Area, Pie } from '@ant-design/plots';
-// import ScrollToTop from "react-scroll-to-top";
 
 const StatisticPage = () => {
   const [data, setData] = useState([]);
   const [products, setProducts] = useState([]);
+  const user = JSON.parse(localStorage.getItem('posUser'));
   useEffect(() => {
     const getProducts = async () => {
       try {
@@ -103,7 +103,7 @@ const StatisticPage = () => {
         <div className="statistic-section">
           <h2 className="text-lg">
             Hoş geldin{' '}
-            <span className="text-[#1F8A70] font-bold text-lg">Ecani VRL</span>
+            <span className="text-[#9967BD] font-bold text-lg">{user?.username}</span>
           </h2>
         </div>
         {/* grid-cols-[repeat(auto-fill,_330px)] */}
