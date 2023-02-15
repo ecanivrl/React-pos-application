@@ -29,7 +29,13 @@ const CartPage = () => {
   };
 
   const getColumnSearchProps = (dataIndex) => ({
-    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters, close }) => (
+    filterDropdown: ({
+      setSelectedKeys,
+      selectedKeys,
+      confirm,
+      clearFilters,
+      close,
+    }) => (
       <div
         style={{
           padding: 8,
@@ -40,7 +46,9 @@ const CartPage = () => {
           ref={searchInput}
           placeholder={`Search ${dataIndex}`}
           value={selectedKeys[0]}
-          onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+          onChange={(e) =>
+            setSelectedKeys(e.target.value ? [e.target.value] : [])
+          }
           onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
           style={{
             marginBottom: 8,
@@ -207,7 +215,6 @@ const CartPage = () => {
           />
         </div>
       ),
-
     },
     {
       title: 'Toplam Fiyat',
@@ -244,15 +251,15 @@ const CartPage = () => {
         <h1 className="text-3xl font-bold text-center pb-5">Sepet Detay</h1>
         <div className="flex flex-row gap-4 max-[1000px]:flex-col ecani max-h-[610px] custom-horizontal-scrollbar overflow-auto pb-16">
           {cart.cartItems.length > 0 ? (
-           <div className='categories overflow-auto custom-horizontal-scrollbar w-full pb-2'>
-             <Table
-              className="ecani custom-horizontal-scrollbar overflow-auto min-w-[700px] rounded-md"
-              dataSource={cart.cartItems}
-              columns={columns}
-              bordered
-              pagination={false}
-            />
-           </div>
+            <div className="categories overflow-auto custom-horizontal-scrollbar w-full pb-2">
+              <Table
+                className="ecani custom-horizontal-scrollbar overflow-auto min-w-[700px] rounded-md"
+                dataSource={cart.cartItems}
+                columns={columns}
+                bordered
+                pagination={false}
+              />
+            </div>
           ) : (
             <div className="w-full h-96 flex justify-center items-center">
               <Link to={'/'}>
