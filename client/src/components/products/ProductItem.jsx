@@ -20,9 +20,9 @@ const ProductItem = ({ item }) => {
       className="products-item border shadow-xl cursor-pointer transition-all select-none"
       onClick={handleClick}
     >
-      <div className="products-img">
+      <div className="products-img  h-28">
         <img
-          className="h-28 w-full border-b object-cover"
+          className="h-full w-full border-b object-cover object-center"
           src={item.img}
           alt=""
         />
