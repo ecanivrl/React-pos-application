@@ -1,5 +1,5 @@
 import { Button, Carousel, Form, Input, message } from 'antd';
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import AuthCarousel from '../../components/auth/AuthCarousel';
 
@@ -9,27 +9,27 @@ const Register = () => {
   const navigate = useNavigate();
   const onFinish = async (values) => {
     setLoading(true)
-    try{
-    const res = await  fetch("http://localhost:5000/api/auth/register",{
+    try {
+      const res = await fetch(process.env.REACT_APP_SERVER_URL + "/api/auth/register", {
         method: "POST",
         body: JSON.stringify(values),
-        headers: { "Content-Type": "application/json; charset=UTF-8"}
+        headers: { "Content-Type": "application/json; charset=UTF-8" }
       })
-     if(res.status === 200){
-       message.success("Kayıt Başarılı")
-       setTimeout(() => {
-         navigate("/login")
-         setLoading(false)
-        message.success("Şimdi Giriş Yapabilirsiniz")
-      },1500)
-     }
-    }catch(err){
+      if (res.status === 200) {
+        message.success("Kayıt Başarılı")
+        setTimeout(() => {
+          navigate("/login")
+          setLoading(false)
+          message.success("Şimdi Giriş Yapabilirsiniz")
+        }, 1500)
+      }
+    } catch (err) {
       message.error("Bir Hata Oluştu")
       console.log(err)
     }
   };
 
-   
+
   return (
     <div className="h-screen">
       <div className="flex justify-between h-full">

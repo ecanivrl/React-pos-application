@@ -10,14 +10,14 @@ const Add = ({
   const [form] = Form.useForm();
   const onFinish = (values) => {
     try {
-      fetch('http://localhost:5000/api/categories/add-category', {
+      fetch(process.env.REACT_APP_SERVER_URL + "/api/categories/add-category", {
         method: 'POST',
         body: JSON.stringify(values),
         headers: { 'content-type': 'application/json; charset=UTF-8' },
       });
-      message.success(` Kategori başarıyla oluşturuldu`);
+      message.success(` ${values.title} Kategorisi başarıyla eklendi.`);
       form.resetFields();
-      setCategories([...categories, {_id: Math.random(), title: values.title}]);
+      setCategories([...categories, { _id: Math.random(), title: values.title }]);
       setTimeout(() => {
         setAddIsModalOpen(false);
       }, 1200);

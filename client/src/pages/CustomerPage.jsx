@@ -3,7 +3,7 @@ import Header from '../components/header/Header';
 import { Button, Input, Space, Spin, Table, message } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import Highlighter from 'react-highlight-words';
-import {  SearchOutlined } from '@ant-design/icons';
+import { SearchOutlined } from '@ant-design/icons';
 
 const CustomerPage = () => {
   const naigate = useNavigate();
@@ -12,7 +12,7 @@ const CustomerPage = () => {
   const [searchText, setSearchText] = useState('');
   const [searchedColumn, setSearchedColumn] = useState('');
   const searchInput = useRef(null);
-  
+
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
     setSearchText(selectedKeys[0]);
@@ -130,7 +130,7 @@ const CustomerPage = () => {
   useEffect(() => {
     const getBillItems = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/bills/get-all`);
+        const res = await fetch(process.env.REACT_APP_SERVER_URL + "/api/bills/get-all");
         const data = await res.json();
         setBillItems(data);
       } catch (error) {
@@ -155,7 +155,7 @@ const CustomerPage = () => {
       ...getColumnSearchProps('customerName'),
       render: (text) => (
         <div
-        key={text._id}
+          key={text._id}
           className="flex justify-between items-center gap-x-5 relative"
         >
           <span>{text}</span>
@@ -189,7 +189,7 @@ const CustomerPage = () => {
       dataIndex: 'createdAt',
       key: 'createdAt',
       sorter: (a, b) => new Date(a.createdAt) - new Date(b.createdAt),
-      render: (text) => <span>{new Date(text).toLocaleDateString(0 , 10)}</span>,
+      render: (text) => <span>{new Date(text).toLocaleDateString(0, 10)}</span>,
     },
     {
       title: 'İşlem Saati',
@@ -213,21 +213,21 @@ const CustomerPage = () => {
       <h1 className="text-4xl font-bold text-center mb-4">Müşterilerim</h1>
       {billItems ? (
         <div className="px-6">
-        <div className="categories overflow-auto custom-horizontal-scrollbar w-full h-[500px] pb-10">
-          <Table
-            className="ecani pb-2 custom-horizontal-scrollbar overflow-auto min-w-[700px] rounded-md "
-            dataSource={billItems}
-            columns={columns}
-            bordered
-            pagination={false}
-            rowKey={(record) => record._id}
-          />
+          <div className="categories overflow-auto custom-horizontal-scrollbar w-full h-[500px] pb-10">
+            <Table
+              className="ecani pb-2 custom-horizontal-scrollbar overflow-auto min-w-[700px] rounded-md "
+              dataSource={billItems}
+              columns={columns}
+              bordered
+              pagination={false}
+              rowKey={(record) => record._id}
+            />
+          </div>
         </div>
-      </div>
-      ):(
+      ) : (
         <div className='flex justify-center items-center h-screen'>
-        <Spin size='large'/>
-      </div>
+          <Spin size='large' />
+        </div>
       )}
     </>
   );

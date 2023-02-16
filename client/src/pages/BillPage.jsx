@@ -3,7 +3,7 @@ import Header from '../components/header/Header';
 import { Button, Input, Space, Spin, Table } from 'antd';
 import PrintBill from '../components/bills/PrintBill';
 import Highlighter from 'react-highlight-words';
-import {  SearchOutlined } from '@ant-design/icons';
+import { SearchOutlined } from '@ant-design/icons';
 
 
 const BillPage = () => {
@@ -13,7 +13,7 @@ const BillPage = () => {
   const [searchText, setSearchText] = useState('');
   const [searchedColumn, setSearchedColumn] = useState('');
   const searchInput = useRef(null);
-  
+
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
     setSearchText(selectedKeys[0]);
@@ -132,7 +132,7 @@ const BillPage = () => {
   useEffect(() => {
     const getBillItems = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/bills/get-all`);
+        const res = await fetch(process.env.REACT_APP_SERVER_URL + "/api/bills/get-all");
         const data = await res.json();
         setBillItems(data);
       } catch (error) {
@@ -204,21 +204,21 @@ const BillPage = () => {
       <h1 className="text-4xl font-bold text-center mb-4">Faturalar</h1>
       {billItems ? (
         <div className="px-6 pb-0">
-        <div className="categories overflow-auto custom-horizontal-scrollbar w-full h-[500px] pb-10">
-          <Table
-            className="ecani pb-2 custom-horizontal-scrollbar overflow-auto min-w-[700px] rounded-md "
-            dataSource={billItems}
-            columns={columns}
-            bordered
-            pagination={false}
-            rowKey={(record) => record._id}
-          />
+          <div className="categories overflow-auto custom-horizontal-scrollbar w-full h-[500px] pb-10">
+            <Table
+              className="ecani pb-2 custom-horizontal-scrollbar overflow-auto min-w-[700px] rounded-md "
+              dataSource={billItems}
+              columns={columns}
+              bordered
+              pagination={false}
+              rowKey={(record) => record._id}
+            />
+          </div>
         </div>
-      </div>
-      ):(
+      ) : (
         <div className='flex justify-center items-center h-screen'>
-        <Spin size='large'/>
-      </div>
+          <Spin size='large' />
+        </div>
       )}
       <PrintBill setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen} customer={customer} />
     </>

@@ -7,20 +7,20 @@ import { reset } from '../../redux/cartSlice';
 const CreateBill = ({ isModalOpen, setIsModalOpen }) => {
   const cart = useSelector((state) => state.cart);
   const [form] = Form.useForm();
-const navigate = useNavigate()
-const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const onFinish = async (values) => {
     try {
-      const res = await fetch("http://localhost:5000/api/bills/add-bill", {
+      const res = await fetch(process.env.REACT_APP_SERVER_URL + "/api/bills/add-bill", {
         method: 'POST',
         body: JSON.stringify({
-           ...values,
-        subTotal: cart.total,
-        tax: ((cart.total * cart.tax) / 100).toFixed(2),
-        totalAmount: (cart.total + (cart.total * cart.tax) / 100).toFixed(2),
-        cartItems: cart.cartItems
-      }),
+          ...values,
+          subTotal: cart.total,
+          tax: ((cart.total * cart.tax) / 100).toFixed(2),
+          totalAmount: (cart.total + (cart.total * cart.tax) / 100).toFixed(2),
+          cartItems: cart.cartItems
+        }),
         headers: { 'content-type': 'application/json; charset=UTF-8' },
       })
       if (res.status === 200) {
@@ -29,7 +29,7 @@ const dispatch = useDispatch()
           setIsModalOpen(false)
           navigate("/bills")
           dispatch(reset())
-        },1400)
+        }, 1400)
       }
     } catch (error) {
       message.error('Fatura Oluşturulamadı')

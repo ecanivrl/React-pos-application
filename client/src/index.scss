@@ -13,7 +13,7 @@ body {
 }
 
 .menu-link{
-  @apply  hover:text-[#40a9ff] flex flex-col transition-all duration-500 justify-center items-center
+  @apply  hover:text-[#40a9ff] flex flex-col transition-all duration-500 justify-center items-center hover:scale-110
 }
 
 .canini{

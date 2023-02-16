@@ -76,7 +76,7 @@ const Header = ({ search, setSearch }) => {
           </Link>
           <Link
             to={'/statistic'}
-            className={`${pathname === "/statistic" && "active"} menu-link hover:scale-110`}
+            className={`${pathname === "/statistic" && "active"} menu-link `}
           >
             <BarChartOutlined className="md:text-2xl text-xl" />
             <span className="md:text-xs text-[10px]">İstatistikler</span>
@@ -88,7 +88,7 @@ const Header = ({ search, setSearch }) => {
             cancelText="Hayır"
           >
             <div
-             className="menu-link hover:scale-110">
+             className="menu-link">
               <LogoutOutlined className="md:text-2xl text-xl" />
               <span className="md:text-xs text-[10px]">Çıkış</span>
             </div>

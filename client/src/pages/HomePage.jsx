@@ -13,7 +13,7 @@ const HomePage = () => {
   useEffect(() => {
     const getCategories = async () => {
       try {
-        const res = await fetch('http://localhost:5000/api/categories/get-all');
+        const res = await fetch(process.env.REACT_APP_SERVER_URL + "/api/categories/get-all");
         const data = await res.json();
         data &&
           setCategories(
@@ -31,7 +31,7 @@ const HomePage = () => {
   useEffect(() => {
     const getProducts = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/products/get-all`);
+        const res = await fetch(process.env.REACT_APP_SERVER_URL + "/api/products/get-all");
         const data = await res.json();
         setProducts(data);
       } catch (error) {
@@ -43,39 +43,39 @@ const HomePage = () => {
 
   return (
     <>
-      <Header search={search} setSearch={setSearch}/>
+      <Header search={search} setSearch={setSearch} />
       {products && categories ? (
         <div className="home px-6 flex flex-col md:flex-row justify-between gap-3 md:pb-0 pb-24">
-        <div className="categories overflow-auto custom-horizontal-scrollbar max-h-[calc(100vh_-_103px)] md:pb-7">
-          <div className="pb-1">
-            <Categories
+          <div className="categories overflow-auto custom-horizontal-scrollbar max-h-[calc(100vh_-_103px)] md:pb-7">
+            <div className="pb-1">
+              <Categories
+                categories={categories}
+                setCategories={setCategories}
+                setFiltered={setFiltered}
+                products={products}
+              />
+            </div>
+          </div>
+          <div className="products flex-[8] overflow-auto max-h-[calc(100vh_-_103px)] pb-44 md:pb-11">
+            <Products
               categories={categories}
-              setCategories={setCategories}
-              setFiltered={setFiltered}
+              filtered={filtered}
               products={products}
+              setProducts={setProducts}
+              search={search}
             />
+            <div className='md:hidden border border-gray-500'>
+              <CartTotals className="" />
+            </div>
+          </div>
+          <div className="cart-wrapper min-w-[325px] md:-mr-[24px] md:-mt-[24px] border max-md:hidden">
+            <CartTotals />
           </div>
         </div>
-        <div className="products flex-[8] overflow-auto max-h-[calc(100vh_-_103px)] pb-44 md:pb-11">
-          <Products
-            categories={categories}
-            filtered={filtered}
-            products={products}
-            setProducts={setProducts}
-            search={search}
-          />
-          <div className='md:hidden border border-gray-500'>
-            <CartTotals className=""/>
-          </div>
+      ) : (
+        <div className='flex justify-center items-center h-screen'>
+          <Spin size='large' />
         </div>
-        <div className="cart-wrapper min-w-[325px] md:-mr-[24px] md:-mt-[24px] border max-md:hidden">
-          <CartTotals />
-        </div>
-      </div>
-      ):(
-       <div className='flex justify-center items-center h-screen'>
-         <Spin size='large'/>
-       </div>
       )}
     </>
   );
