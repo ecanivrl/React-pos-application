@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import Header from '../components/header/Header';
 import StatisticCard from '../components/statistics/StatisticCard';
 import { Area, Pie } from '@ant-design/plots';
+import { Spin } from 'antd';
 
 const StatisticPage = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState();
   const [products, setProducts] = useState([]);
   const user = JSON.parse(localStorage.getItem('posUser'));
   useEffect(() => {
@@ -98,49 +99,55 @@ const StatisticPage = () => {
     <>
       {/* <ScrollToTop smooth top={20} type='reset'/> */}
       <Header className="" />
-      <div className="px-6">
-        <h1 className="text-2xl font-bold text-center">İstatistiklerim</h1>
-        <div className="statistic-section">
-          <h2 className="text-lg">
-            Hoş geldin{' '}
-            <span className="text-[#9967BD] font-bold text-lg">{user?.username}</span>
-          </h2>
-        </div>
-        {/* grid-cols-[repeat(auto-fill,_330px)] */}
-        <div className="flex flex-col gap-4 pb-10 ecani max-h-[610px] custom-horizontal-scrollbar overflow-auto">
-          <div className="statistic-cards grid xl:grid-cols-4 md:grid-cols-2 my-2 gap-4 justify-center">
-            <StatisticCard
-              title={'Toplam Müşteri'}
-              amount={data?.length}
-              img={'images/user.png'}
-            />
-            <StatisticCard
-              title={'Toplam Satış'}
-              amount={Total()}
-              img={'images/sale.png'}
-            />
-            <StatisticCard
-              title={'Toplam Kazanç'}
-              amount={totalAmount()} 
-              img={'images/money.png'}
-            />
-            
-            <StatisticCard
-              title={'Toplam Ürün'}
-              amount={products?.length}
-              img={'images/product.png'}
-            />
-          </div>
-          <div className="flex justify-between w-full gap-10 lg:flex-row flex-col items-center py-16">
-            <div className="lg:w-1/2 w-full h-72">
-              <Area {...config} />
-            </div>
-            <div className="lg:w-1/2 w-full h-80">
-              <Pie {...config2} />
-            </div>
-          </div>
-        </div>
-      </div>
+      <h1 className="text-2xl font-bold text-center">İstatistiklerim</h1>
+     {data ? (
+       <div className="px-6">
+       <div className="statistic-section">
+         <h2 className="text-lg">
+           Hoş geldin{' '}
+           <span className="text-[#9967BD] font-bold text-lg">{user?.username}</span>
+         </h2>
+       </div>
+       {/* grid-cols-[repeat(auto-fill,_330px)] */}
+       <div className="flex flex-col gap-4 pb-10 ecani max-h-[610px] custom-horizontal-scrollbar overflow-auto">
+         <div className="statistic-cards grid xl:grid-cols-4 md:grid-cols-2 my-2 gap-4 justify-center">
+           <StatisticCard
+             title={'Toplam Müşteri'}
+             amount={data?.length}
+             img={'images/user.png'}
+           />
+           <StatisticCard
+             title={'Toplam Satış'}
+             amount={Total()}
+             img={'images/sale.png'}
+           />
+           <StatisticCard
+             title={'Toplam Kazanç'}
+             amount={totalAmount()} 
+             img={'images/money.png'}
+           />
+           
+           <StatisticCard
+             title={'Toplam Ürün'}
+             amount={products?.length}
+             img={'images/product.png'}
+           />
+         </div>
+         <div className="flex justify-between w-full gap-10 lg:flex-row flex-col items-center py-16">
+           <div className="lg:w-1/2 w-full h-72">
+             <Area {...config} />
+           </div>
+           <div className="lg:w-1/2 w-full h-80">
+             <Pie {...config2} />
+           </div>
+         </div>
+       </div>
+     </div>
+     ):(
+      <div className='flex justify-center items-center h-screen'>
+      <Spin size='large'/>
+    </div>
+     )}
     </>
   );
 };

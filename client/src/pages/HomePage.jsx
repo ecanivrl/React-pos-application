@@ -3,10 +3,11 @@ import Header from '../components/header/Header';
 import Categories from '../components/categories/Categories';
 import Products from '../components/products/Products';
 import CartTotals from '../components/cart/CartTotals';
+import { Spin } from 'antd';
 
 const HomePage = () => {
-  const [categories, setCategories] = useState([]);
-  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState();
+  const [products, setProducts] = useState();
   const [filtered, setFiltered] = useState([]);
   const [search, setSearch] = useState('');
   useEffect(() => {
@@ -43,7 +44,8 @@ const HomePage = () => {
   return (
     <>
       <Header search={search} setSearch={setSearch}/>
-      <div className="home px-6 flex flex-col md:flex-row justify-between gap-3 md:pb-0 pb-24">
+      {products && categories ? (
+        <div className="home px-6 flex flex-col md:flex-row justify-between gap-3 md:pb-0 pb-24">
         <div className="categories overflow-auto custom-horizontal-scrollbar max-h-[calc(100vh_-_103px)] md:pb-7">
           <div className="pb-1">
             <Categories
@@ -70,6 +72,11 @@ const HomePage = () => {
           <CartTotals />
         </div>
       </div>
+      ):(
+       <div className='flex justify-center items-center h-screen'>
+         <Spin size='large'/>
+       </div>
+      )}
     </>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Header from '../components/header/Header';
-import { Button, Input, Space, Table } from 'antd';
+import { Button, Input, Space, Spin, Table } from 'antd';
 import PrintBill from '../components/bills/PrintBill';
 import Highlighter from 'react-highlight-words';
 import {  SearchOutlined } from '@ant-design/icons';
@@ -8,7 +8,7 @@ import {  SearchOutlined } from '@ant-design/icons';
 
 const BillPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [billItems, setBillItems] = useState([]);
+  const [billItems, setBillItems] = useState();
   const [customer, setCustomer] = useState();
   const [searchText, setSearchText] = useState('');
   const [searchedColumn, setSearchedColumn] = useState('');
@@ -201,8 +201,9 @@ const BillPage = () => {
   return (
     <>
       <Header />
-      <div className="px-6 pb-0">
-        <h1 className="text-4xl font-bold text-center mb-4">Faturalar</h1>
+      <h1 className="text-4xl font-bold text-center mb-4">Faturalar</h1>
+      {billItems ? (
+        <div className="px-6 pb-0">
         <div className="categories overflow-auto custom-horizontal-scrollbar w-full h-[500px] pb-10">
           <Table
             className="ecani pb-2 custom-horizontal-scrollbar overflow-auto min-w-[700px] rounded-md "
@@ -214,6 +215,11 @@ const BillPage = () => {
           />
         </div>
       </div>
+      ):(
+        <div className='flex justify-center items-center h-screen'>
+        <Spin size='large'/>
+      </div>
+      )}
       <PrintBill setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen} customer={customer} />
     </>
   );
