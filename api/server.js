@@ -4,7 +4,7 @@ const dotenv = require("dotenv");
 const app = express();
 const cors = require("cors");
 const logger = require("morgan");
-const port = 5000;
+const port = process.env.PORT || 5000;
 mongoose.set("strictQuery", true);
 
 // !Routes
