@@ -12,11 +12,11 @@ import { Badge, Input, Popconfirm, message } from 'antd';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-const Header = ({search, setSearch}) => {
+const Header = ({ search, setSearch }) => {
   const cart = useSelector((state) => state.cart);
-  const {pathname} = useLocation();
+  const { pathname } = useLocation();
   const navigate = useNavigate();
-  
+
   const LogOut = () => {
     if (localStorage.getItem('posUser')) {
       localStorage.removeItem('posUser');
@@ -49,10 +49,7 @@ const Header = ({search, setSearch}) => {
           className="menu-links flex justify-between items-center md:gap-7 gap-3 md:static z-50 fixed bottom-0 md:w-auto w-screen
         md:bg-transparent bg-white left-0 md:px-0 px-8 border-t md:border-none py-1 md:py-0"
         >
-          <Link
-            to={'/'}
-            className="menu-link hover:text-[#40a9ff] flex flex-col transition-all duration-500 justify-center items-center"
-          >
+          <Link to={'/'} className={`${pathname === "/" && "active"} menu-link`}>
             <HomeOutlined className="md:text-2xl text-xl" />
             <span className="md:text-xs text-[10px]">Ana Sayfa</span>
           </Link>
@@ -61,31 +58,25 @@ const Header = ({search, setSearch}) => {
             offset={[0, 0]}
             className="md:flex hidden"
           >
-            <Link
-              to={'/cart'}
-              className="menu-link hover:text-[#40a9ff] flex flex-col transition-all duration-500 justify-center items-center"
-            >
+            <Link to={'/cart'}className={`${pathname === "/cart" && "active"} menu-link`}>
               <ShoppingCartOutlined className="md:text-2xl text-xl" />
               <span className="md:text-xs text-[10px]">Sepet</span>
             </Link>
           </Badge>
-          <Link
-            to={'/bills'}
-            className="menu-link hover:text-[#40a9ff] flex flex-col transition-all duration-500 justify-center items-center"
-          >
+          <Link to={'/bills'} className={`${pathname === "/bills" && "active"} menu-link`}>
             <CopyOutlined className="md:text-2xl text-xl" />
             <span className="md:text-xs text-[10px]">Faturalar</span>
           </Link>
           <Link
             to={'/customers'}
-            className="menu-link hover:text-[#40a9ff] flex flex-col transition-all duration-500 justify-center items-center"
+            className={`${pathname === "/customers" && "active"} menu-link`}
           >
             <UserOutlined className="md:text-2xl text-xl" />
             <span className="md:text-xs text-[10px]">Müşteriler</span>
           </Link>
           <Link
             to={'/statistic'}
-            className="menu-link hover:text-[#40a9ff] flex flex-col transition-all duration-500 justify-center items-center"
+            className={`${pathname === "/statistic" && "active"} menu-link hover:scale-110`}
           >
             <BarChartOutlined className="md:text-2xl text-xl" />
             <span className="md:text-xs text-[10px]">İstatistikler</span>
@@ -96,7 +87,8 @@ const Header = ({search, setSearch}) => {
             okText="Evet"
             cancelText="Hayır"
           >
-            <div className="menu-link hover:text-[#40a9ff] flex flex-col transition-all duration-500 justify-center items-center">
+            <div
+             className="menu-link hover:scale-110">
               <LogoutOutlined className="md:text-2xl text-xl" />
               <span className="md:text-xs text-[10px]">Çıkış</span>
             </div>
@@ -109,7 +101,8 @@ const Header = ({search, setSearch}) => {
         >
           <Link
             to={'/cart'}
-            className="menu-link hover:text-[#40a9ff] flex flex-col transition-all duration-500 justify-center items-center"
+            className={`${pathname === "/cart" && "active"} menu-link hover:scale-110`}
+
           >
             <ShoppingCartOutlined className="text-2xl " />
             <span className="md:text-xs text-[10px]">Sepet</span>

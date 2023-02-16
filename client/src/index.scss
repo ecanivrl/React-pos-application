@@ -12,11 +12,20 @@ body {
   @apply bg-gray-50;
 }
 
+.menu-link{
+  @apply  hover:text-[#40a9ff] flex flex-col transition-all duration-500 justify-center items-center
+}
+
 .canini{
   -webkit-box-shadow: 1px 38px 127px 13px rgb(58, 230, 27);
--moz-box-shadow: 1px 38px 127px 13px rgb(30, 222, 68);
+-moz-box-shadow: 1px 38px 127px 13px #1ede44;
 box-shadow: 1px 38px 127px 13px rgb(233, 0, 54);
 }
+
+.active{
+  @apply text-[#40a9ff]
+}
+
 .ecani::-webkit-scrollbar {
   display: none;
 }
